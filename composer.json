@@ -1,5 +1,5 @@
 {
-  "name": "reliv/RcmI18n",
+  "name": "reliv/rcm-i18n",
   "description": "Stores translations in DB for ZF2 i18n",
   "type": "library",
   "license": "BSD-3-Clause",
