@@ -1,0 +1,34 @@
+{
+  "name": "reliv/RcmI18n",
+  "description": "Stores translations in DB for ZF2 i18n",
+  "type": "library",
+  "license": "BSD-3-Clause",
+  "keywords": [
+    "reliv",
+    "plugins",
+    "module",
+    "zf2"
+  ],
+  "homepage": "http://www.reliv.com/",
+  "authors": [
+    {
+      "name": "Rod McNew",
+      "email": "rmcnew@relivinc.com",
+      "homepage": "http://www.reliv.com/"
+    }
+  ],
+  "require": {
+    "php": ">=5.4",
+    "reliv/rcm": "0.*",
+    "reliv/rcm-html-purifier": "0.*"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "~4.0",
+    "squizlabs/php_codesniffer": "2.*"
+  },
+  "autoload": {
+    "psr-4": {
+      "RcmI18n\\": "src/"
+    }
+  }
+}
