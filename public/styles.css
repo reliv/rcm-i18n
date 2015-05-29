@@ -1,3 +1,5 @@
+/* <rcm-i18n> */
+
 .rcmI18n .loading {
     display: none;
 
@@ -142,3 +144,5 @@
 .rcmI18n .titleTranslations {
     background-color: #F5F5F5;
 }
+
+/* </rcm-i18n> */

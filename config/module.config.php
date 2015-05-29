@@ -22,6 +22,13 @@ return [
     'RcmI18n' => [
         'defaultLocale' => 'en_US',
     ],
+    'Rcm' => [
+        'HtmlIncludes' => [
+            'headScriptFile' => [
+                '/modules/rcm-angular-js/angular-ui/bootstrap/ui-bootstrap-0.11.0.min.js' => [],
+            ],
+        ],
+    ],
     'RcmUser' => [
         'Acl\Config' => [
             'ResourceProviders' => [
@@ -154,7 +161,14 @@ return [
             'aliases' => [
                 'modules/rcm-i18n/' => __DIR__ . '/../public/',
             ],
+            'collections' => [
+                'modules/rcm/modules.js' => [
+                    'modules/rcm-i18n/rcm-locales.js',
+                ],
+                'modules/rcm/modules.css' => [
+                    'modules/rcm-i18n/styles.css'
+                ],
+            ],
         ],
-
     ],
 ];
