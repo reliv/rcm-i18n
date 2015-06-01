@@ -1,5 +1,5 @@
 /**
- * rcm-locales
+ * rcm-locales rcm-i18n
  * Created by idavis on 7/2/14.
  */
 angular.module('rcmLocales', ['RcmHtmlEditor'])
