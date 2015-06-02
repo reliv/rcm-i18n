@@ -1,4 +1,5 @@
 /**
+ * rcm-locales rcm-i18n
  * Created by idavis on 7/2/14.
  */
 angular.module('rcmLocales', ['RcmHtmlEditor'])
@@ -205,15 +206,7 @@ angular.module('rcmLocales', ['RcmHtmlEditor'])
         };
     }
 );
+
 rcm.addAngularModule(
     'rcmLocales'
-    /*, {files: ['/modules/rcm-i18n/rcmTranslationsCtrl.js']}*/
 );
-//angular.element(document).ready(
-//    function () {
-//        angular.bootstrap(
-//            document.querySelectorAll('[ng-controller=rcmTranslations]'),
-//            ['rcmLocales']
-//        );
-//    }
-//);
