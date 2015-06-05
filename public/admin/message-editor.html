@@ -7,7 +7,7 @@
                     <div class="col-sm-12">
                         <button type="button" class="close" data-dismiss="modal"
                                 aria-hidden="true">&times;</button>
-                        <h1 class="modal-title" id="myModalLabel">Translations</h1>
+                        <h1 class="modal-title" id="myModalLabel">{{"Translations"|translate}}</h1>
                     </div>
                 </div>
 
@@ -63,7 +63,7 @@
                             </div>
 
                             <div class="message-row"
-                                 ng-repeat="message in messages | filter:messageQuery">
+                                 ng-repeat="message in messages | rcmi18nMessageFilter:messageQuery">
 
                                 <div class="message-cell col-1 default-text">
                                     {{message.defaultText}}
@@ -123,7 +123,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default"
-                            data-dismiss="modal">Close
+                            data-dismiss="modal">{{"Close"|translate}}
                     </button>
                 </div>
             </div>
