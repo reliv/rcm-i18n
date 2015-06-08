@@ -1,8 +1,14 @@
 <?php
+
+namespace RcmI18n\Controller;
+
+use RcmI18n\Entity\Message;
+use Zend\Http\PhpEnvironment\Response;
+use Zend\Mvc\Controller\AbstractRestfulController;
+use Zend\View\Model\JsonModel;
+
 /**
- * MessagesController.php
- *
- * LongDescHere
+ * MessagesController
  *
  * PHP version 5
  *
@@ -14,14 +20,6 @@
  * @version   GIT: <git_id>
  * @link      https://github.com/reliv
  */
-
-namespace RcmI18n\Controller;
-
-use RcmI18n\Entity\Message;
-use Zend\Http\PhpEnvironment\Response;
-use Zend\Mvc\Controller\AbstractRestfulController;
-use Zend\View\Model\JsonModel;
-
 class MessagesController extends AbstractRestfulController
 {
 
@@ -45,11 +43,13 @@ class MessagesController extends AbstractRestfulController
         foreach ($defaultMessages as $defaultMessage) {
             /** @var \RcmI18n\Entity\Message $defaultMessage */
             $defaultText = $defaultMessage->getDefaultText();
-            $messageId = $defaultMessage->getMessageId();
+
             $text = null;
+
             foreach ($localeMessages as $localeMessage) {
                 if ($localeMessage->getDefaultText() == $defaultText) {
                     $text = $localeMessage->getText();
+                    $messageId = $localeMessage->getMessageId();
                     break;
                 }
             }

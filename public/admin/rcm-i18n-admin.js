@@ -1,8 +1,8 @@
 /**
- * rcm-locales rcm-i18n
+ * rcm-i18n-admin
  * Created by idavis on 7/2/14.
  */
-angular.module('rcmLocales', ['RcmHtmlEditor'])
+angular.module('rcmI18nAdmin', ['RcmHtmlEditor'])
     .controller(
     'rcmTranslations', [
         '$scope', '$element', '$log', '$http', '$sce', 'rcmHtmlEditorService',
@@ -177,7 +177,8 @@ angular.module('rcmLocales', ['RcmHtmlEditor'])
     ]
 )
     .filter(
-    'filter', function () { //search for text and Default text
+    'rcmi18nMessageFilter',
+    function () { //search for text and Default text
 
         var compareStr = function (stra, strb) {
             stra = ("" + stra).toLowerCase();
@@ -193,10 +194,7 @@ angular.module('rcmLocales', ['RcmHtmlEditor'])
             var result = {};
             angular.forEach(
                 input, function (message) {
-                    if (compareStr(
-                            message['defaultText'],
-                            query
-                        ) || compareStr(message.text, query)) {
+                    if (compareStr(message['defaultText'], query) || compareStr(message.text, query)) {
                         result[message.id] = message;
                     }
                 }
@@ -208,5 +206,5 @@ angular.module('rcmLocales', ['RcmHtmlEditor'])
 );
 
 rcm.addAngularModule(
-    'rcmLocales'
+    'rcmI18nAdmin'
 );

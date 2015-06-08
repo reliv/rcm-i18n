@@ -26,6 +26,8 @@ return [
         'HtmlIncludes' => [
             'headScriptFile' => [
                 '/modules/rcm-angular-js/angular-ui/bootstrap/ui-bootstrap-0.11.0.min.js' => [],
+                '/vendor/angular-translate/angular-translate.min.js' => [],
+                '/rcmi18n/translations.js' => [],
             ],
         ],
     ],
@@ -56,7 +58,7 @@ return [
                     'Translations' => [
                         'label' => 'Translations',
                         'class' => 'RcmAdminMenu RcmBlankDialog Translations',
-                        'uri' => '/modules/rcm-i18n/message-editor.html',
+                        'uri' => '/modules/rcm-i18n/admin/message-editor.html',
                         'title' => 'Translations',
                     ]
                 ]
@@ -119,11 +121,12 @@ return [
         'invokables' => [
             'RcmI18n\Controller\Locale' => 'RcmI18n\Controller\LocaleController',
             'RcmI18n\Controller\Messages' => 'RcmI18n\Controller\MessagesController',
+            'RcmI18n\Controller\SiteTranslationsJs' => 'RcmI18n\Controller\SiteTranslationsJsController',
         ]
     ],
     'router' => [
         'routes' => [
-            'locales' => [
+            'RcmI18n\Locale' => [
                 'type' => 'Zend\Mvc\Router\Http\Segment',
                 'options' => [
                     'route' => '/rcmi18n/locales',
@@ -132,12 +135,21 @@ return [
                     ],
                 ],
             ],
-            'messages' => [
+            'RcmI18n\Messages' => [
                 'type' => 'Zend\Mvc\Router\Http\Segment',
                 'options' => [
                     'route' => '/rcmi18n/messages/:locale[/:id]',
                     'defaults' => [
                         'controller' => 'RcmI18n\Controller\Messages',
+                    ],
+                ],
+            ],
+            'RcmI18n\SiteTranslationsJs' => [
+                'type' => 'Zend\Mvc\Router\Http\Segment',
+                'options' => [
+                    'route' => '/rcmi18n/translations.js',
+                    'defaults' => [
+                        'controller' => 'RcmI18n\Controller\SiteTranslationsJs',
                     ],
                 ],
             ],
@@ -162,11 +174,15 @@ return [
                 'modules/rcm-i18n/' => __DIR__ . '/../public/',
             ],
             'collections' => [
+
                 'modules/rcm/modules.js' => [
-                    'modules/rcm-i18n/rcm-locales.js',
+                    'modules/rcm-i18n/rcm-i18n.js',
                 ],
-                'modules/rcm/modules.css' => [
-                    'modules/rcm-i18n/styles.css'
+                'modules/rcm-admin/admin.js' => [
+                    'modules/rcm-i18n/admin/rcm-i18n-admin.js',
+                ],
+                'modules/rcm-admin/admin.css' => [
+                    'modules/rcm-i18n/admin/styles.css'
                 ],
             ],
         ],
