@@ -13,9 +13,27 @@ class MessageTest extends \PHPUnit_Framework_TestCase
      */
     protected $unit;
 
-    function setup()
+    /**
+     * setup
+     *
+     * @return void
+     */
+    public function setup()
     {
         $this->unit = new Message();
+    }
+
+    /**
+     * testSetGetMessage
+     *
+     * @return void
+     */
+    public function testSetGetMessage()
+    {
+        $value = 123;
+        $this->unit->setMessageId($value);
+
+        $this->assertEquals($value, $this->unit->getMessageId());
     }
 
     /**
@@ -47,4 +65,33 @@ class MessageTest extends \PHPUnit_Framework_TestCase
         $this->unit->setText($value);
         $this->assertEquals($value, $this->unit->getText());
     }
-} 
+
+    /**
+     * testSetGetMessage
+     *
+     * @return void
+     */
+    public function testDataMethods()
+    {
+        $value = 'TestText';
+        $this->unit->setText($value);
+
+        $this->assertInstanceOf(
+            '\Traversable',
+            $this->unit->getIterator()
+        );
+
+        $this->assertTrue(
+            is_array(
+                $this->unit->toArray()
+            )
+        );
+
+        $this->assertEquals(
+            $value,
+            $this->unit->toArray()['text']
+        );
+
+        $this->assertTrue(is_array($this->unit->jsonSerialize()));
+    }
+}
