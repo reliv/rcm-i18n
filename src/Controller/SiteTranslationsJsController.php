@@ -104,7 +104,8 @@ class SiteTranslationsJsController extends AbstractRestfulJsonController
             " translations: {'{$locale}': $translationJson}," .
             ' get: function (defaultText, locale) {' .
             '  if(!locale){locale = rcmI18nTranslations.defaultLocale;}' .
-            '  if (typeof rcmI18nTranslations.translations[locale][defaultText] === "string") {return rcmI18nTranslations.translations[locale][defaultText];}' .
+            '  if (typeof rcmI18nTranslations.translations[locale][defaultText] === "string") ' .
+            '  {return rcmI18nTranslations.translations[locale][defaultText];}' .
             '  return defaultText;' .
             ' }' .
             '};';
