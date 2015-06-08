@@ -100,9 +100,13 @@ class SiteTranslationsJsController extends AbstractRestfulJsonController
 
         $content =
             'var rcmI18nTranslations = {' .
-            '"get": function(defaultText) {if(typeof rcmI18nTranslations[defaultText] === "string"){return rcmI18nTranslations[defaultText];} return defaultText;},' .
-            "locale: '{$locale}'," .
-            "translations: $translationJson" .
+            " defaultLocale: '{$locale}'," .
+            " translations: {'{$locale}': $translationJson}," .
+            ' get: function (defaultText, locale) {' .
+            '  if(!locale){locale = rcmI18nTranslations.defaultLocale;}' .
+            '  if (typeof rcmI18nTranslations.translations[locale][defaultText] === "string") {return rcmI18nTranslations.translations[locale][defaultText];}' .
+            '  return defaultText;' .
+            ' }' .
             '};';
 
         $response->setContent($content);

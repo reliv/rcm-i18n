@@ -199,7 +199,6 @@ angular.module('rcmI18nAdmin', ['RcmHtmlEditor'])
                     }
                 }
             );
-            console.log(result);
 
             return result;
         };

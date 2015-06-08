@@ -8,13 +8,17 @@ angular.module('rcmI18n', ['pascalprecht.translate'])
         function ($translateProvider) {
 
             if (typeof rcmI18nTranslations !== 'object') {
-                console.warn('rcmI18nTranslations was not defined');
+                console.warn('rcmI18nTranslations was not defined, translations not loaded.');
+                return;
             }
             $translateProvider.translations(
-                rcmI18nTranslations.locale,
-                rcmI18nTranslations.translations
+                rcmI18nTranslations.defaultLocale,
+                rcmI18nTranslations.translations[rcmI18nTranslations.defaultLocale]
             );
-            $translateProvider.preferredLanguage(rcmI18nTranslations.locale);
+
+            $translateProvider.preferredLanguage(rcmI18nTranslations.defaultLocale);
+
+            $translateProvider.useSanitizeValueStrategy('escape');
         }
     ]
 );
