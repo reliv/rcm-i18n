@@ -90,7 +90,9 @@ class SiteTranslationsJsController extends AbstractRestfulJsonController
         $response = $this->getResponse();
         $response->getHeaders()->addHeaders(
             array(
-                'Content-Type' => 'application/javascript'
+                'Content-Type' => 'application/javascript',
+                'Pragma' => 'cache',
+                'Cache-Control' => 'max-age=3600',
             )
         );
 
