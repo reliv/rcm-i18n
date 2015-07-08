@@ -55,7 +55,7 @@ class ParameterizeTranslator
     }
 
     /**
-     * paramTranslate
+     * translate
      *
      * @param string $message
      * @param array  $params

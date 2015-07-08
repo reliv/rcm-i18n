@@ -1,14 +1,12 @@
 <?php
 
-namespace RcmI18n\ViewHelper;
+namespace RcmI18n\Controller\Plugin;
 
 use RcmI18n\Service\ParameterizeTranslator;
-use Zend\Form\View\Helper\AbstractHelper;
+use Zend\Mvc\Controller\Plugin\AbstractPlugin;
 
 /**
  * Class ParamTranslate
- *
- * LongDescHere
  *
  * PHP version 5
  *
@@ -20,7 +18,7 @@ use Zend\Form\View\Helper\AbstractHelper;
  * @version   Release: <package_version>
  * @link      https://github.com/reliv
  */
-class ParamTranslate extends AbstractHelper
+class ParamTranslate extends AbstractPlugin
 {
     /**
      * @var ParameterizeTranslator

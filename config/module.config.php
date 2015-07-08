@@ -86,7 +86,7 @@ return [
             'RcmI18n\Event\MissingTranslationListener' =>
                 'RcmI18n\Factory\MissingTranslationListenerFactory',
             'RcmI18n\Service\ParameterizeTranslator' =>
-                'RcmI18n\Factory\ParameterizeTranslatorFactory',
+                'RcmI18n\Factory\ServiceParameterizeTranslatorFactory',
         ]
     ],
     'translator_plugins' => [
@@ -126,17 +126,19 @@ return [
         'invokables' => [
             'RcmI18n\Controller\Locale' =>
                 'RcmI18n\Controller\LocaleController',
-
             'RcmI18n\Controller\Messages' =>
                 'RcmI18n\Controller\MessagesController',
-
             'RcmI18n\Controller\SiteTranslationsJs' =>
                 'RcmI18n\Controller\SiteTranslationsJsController',
-
             'RcmI18n\Controller\ApiTranslateController' =>
                 'RcmI18n\Controller\ApiTranslateController',
 
         ]
+    ],
+    'controller_plugins' => [
+        'factories' => [
+            'paramTranslate' => 'RcmI18n\Factory\ControllerPluginParamTranslatorFactory',
+        ],
     ],
     'router' => [
         'routes' => [

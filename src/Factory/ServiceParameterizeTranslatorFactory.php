@@ -1,12 +1,12 @@
 <?php
 
-namespace RcmI18n\FactoryFactory;
+namespace RcmI18n\Factory;
 
 use RcmI18n\Service\ParameterizeTranslator;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
-class ParameterizeTranslatorFactory implements FactoryInterface
+class ServiceParameterizeTranslatorFactory implements FactoryInterface
 {
     /**
      * Create service
@@ -17,7 +17,7 @@ class ParameterizeTranslatorFactory implements FactoryInterface
      */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        $translator = $this->serviceLocator->get('MvcTranslator');
+        $translator = $serviceLocator->get('MvcTranslator');
 
         return new ParameterizeTranslator($translator);
     }
