@@ -79,9 +79,14 @@ return [
      */
     'service_manager' => [
         'factories' => [
-            'MvcTranslator' => 'RcmI18n\Factory\TranslatorFactory',
-            'RcmI18n\Model\Locales' => 'RcmI18n\Factory\LocalesFactory',
-            'RcmI18n\Event\MissingTranslationListener' => 'RcmI18n\Factory\MissingTranslationListenerFactory',
+            'MvcTranslator' =>
+                'RcmI18n\Factory\TranslatorFactory',
+            'RcmI18n\Model\Locales' =>
+                'RcmI18n\Factory\LocalesFactory',
+            'RcmI18n\Event\MissingTranslationListener' =>
+                'RcmI18n\Factory\MissingTranslationListenerFactory',
+            'RcmI18n\Service\ParameterizeTranslator' =>
+                'RcmI18n\Factory\ParameterizeTranslatorFactory',
         ]
     ],
     'translator_plugins' => [
@@ -119,9 +124,18 @@ return [
     ],
     'controllers' => [
         'invokables' => [
-            'RcmI18n\Controller\Locale' => 'RcmI18n\Controller\LocaleController',
-            'RcmI18n\Controller\Messages' => 'RcmI18n\Controller\MessagesController',
-            'RcmI18n\Controller\SiteTranslationsJs' => 'RcmI18n\Controller\SiteTranslationsJsController',
+            'RcmI18n\Controller\Locale' =>
+                'RcmI18n\Controller\LocaleController',
+
+            'RcmI18n\Controller\Messages' =>
+                'RcmI18n\Controller\MessagesController',
+
+            'RcmI18n\Controller\SiteTranslationsJs' =>
+                'RcmI18n\Controller\SiteTranslationsJsController',
+
+            'RcmI18n\Controller\ApiTranslateController' =>
+                'RcmI18n\Controller\ApiTranslateController',
+
         ]
     ],
     'router' => [
@@ -153,11 +167,22 @@ return [
                     ],
                 ],
             ],
+            'RcmI18n\ApiTranslate' => [
+                'type' => 'Zend\Mvc\Router\Http\Segment',
+                'options' => [
+                    'route' => '/api/rcm-translate-api[/:namespace]',
+                    'defaults' => [
+                        'controller' => 'RcmI18n\Controller\ApiTranslateController',
+                        'namespace' => 'default',
+                    ],
+                ],
+            ],
         ]
     ],
     'view_helpers' => [
         'factories' => [
             'translate' => 'RcmI18n\Factory\TranslateHtmlFactory',
+            'paramTranslate' => 'RcmI18n\Factory\ViewHelperParamTranslatorFactory',
         ]
     ],
     'view_manager' => [
