@@ -68,6 +68,7 @@ class MissingTranslationListener implements ListenerAggregateInterface
     protected function getDefaultLocale()
     {
         $config = $this->getConfig();
+
         return $config['RcmI18n']['defaultLocale'];
     }
 
