@@ -4,6 +4,7 @@ namespace RcmI18n\Event;
 
 use Doctrine\ORM\EntityManager;
 use RcmI18n\Entity\Message;
+use Zend\EventManager\EventInterface;
 use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\ListenerAggregateInterface;
 use Zend\I18n\Translator\Translator;
@@ -24,6 +25,9 @@ use Zend\ServiceManager\ServiceLocatorInterface;
  */
 class MissingTranslationListener implements ListenerAggregateInterface
 {
+    /**
+     * Will not add translations in the namespace to the DB
+     */
     const DO_NOT_TRANSLATE = 'DO_NOT_TRANSLATE';
 
     /**
@@ -70,7 +74,7 @@ class MissingTranslationListener implements ListenerAggregateInterface
     /**
      * getEntityManager
      *
-     * @return array
+     * @return EntityManager
      */
     protected function getEntityManager()
     {
@@ -113,7 +117,7 @@ class MissingTranslationListener implements ListenerAggregateInterface
     /**
      * addMissingDefaultTranslation
      *
-     * @param $event
+     * @param EventInterface $event
      *
      * @return void
      */
@@ -155,24 +159,6 @@ class MissingTranslationListener implements ListenerAggregateInterface
 
             $em->persist($newMessage);
             $em->flush($newMessage);
-        }
-    }
-
-    /**
-     * emailMissingTranslation
-     *
-     * @param $event
-     *
-     * @return void
-     */
-    public function emailMissingTranslation($event)
-    {
-        $params = $event->getParams();
-
-        $defaultLocale = $this->getDefaultLocale();
-
-        if ($params['locale'] !== $defaultLocale) {
-            // @todo write and implement this
         }
     }
 }

@@ -58,12 +58,16 @@ class TranslatorFactory implements FactoryInterface
         }
         $translator->setLocale(\Locale::getDefault());
 
-        // Register listener
-        $listener = $serviceLocator->get('RcmI18n\Event\MissingTranslationListener');
+        /* Register listener if configured */
+        $translationListener = $config['RcmI18n']['translationListener'];
 
-        $event = $translator->getEventManager();
-
-        $listener->attach($event);
+        if (!empty($translationListener && $serviceLocator->has($translationListener))) {
+            $listener = $serviceLocator->get(
+                $translationListener
+            );
+            $event = $translator->getEventManager();
+            $listener->attach($event);
+        }
 
         return new \Zend\Mvc\I18n\Translator($translator);
     }
