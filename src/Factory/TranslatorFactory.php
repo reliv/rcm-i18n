@@ -61,7 +61,7 @@ class TranslatorFactory implements FactoryInterface
         /* Register listener if configured */
         $translationListener = $config['RcmI18n']['translationListener'];
 
-        if (!empty($translationListener && $serviceLocator->has($translationListener))) {
+        if (!empty($translationListener) && $serviceLocator->has($translationListener)) {
             $listener = $serviceLocator->get(
                 $translationListener
             );
