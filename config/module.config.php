@@ -21,6 +21,10 @@ return [
 
     'RcmI18n' => [
         'defaultLocale' => 'en_US',
+        /* register a translation listener or null if no listener required
+            Example: 'translationListener' => 'RcmI18n\Event\MissingTranslationListener'
+        */
+        'translationListener' => null,
     ],
     'Rcm' => [
         'HtmlIncludes' => [
@@ -83,6 +87,7 @@ return [
                 'RcmI18n\Factory\TranslatorFactory',
             'RcmI18n\Model\Locales' =>
                 'RcmI18n\Factory\LocalesFactory',
+            /* This listener auto adds missing translations to the DB */
             'RcmI18n\Event\MissingTranslationListener' =>
                 'RcmI18n\Factory\MissingTranslationListenerFactory',
             'RcmI18n\Service\ParameterizeTranslator' =>
