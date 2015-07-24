@@ -37,7 +37,7 @@ class ParamTranslate extends AbstractPlugin
      * __invoke
      *
      * @param        $message
-     * @param array  $prams
+     * @param array  $params
      * @param string $textDomain
      * @param null   $locale
      *
@@ -45,13 +45,13 @@ class ParamTranslate extends AbstractPlugin
      */
     public function __invoke(
         $message,
-        $prams = [],
+        $params = [],
         $textDomain = 'default',
         $locale = null
     ) {
         return $this->paramTranslator->translate(
             $message,
-            $prams,
+            $params,
             $textDomain,
             $locale
         );

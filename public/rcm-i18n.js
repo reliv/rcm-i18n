@@ -18,7 +18,8 @@ angular.module('rcmI18n', ['pascalprecht.translate'])
 
             $translateProvider.preferredLanguage(rcmI18nTranslations.defaultLocale);
 
-            $translateProvider.useSanitizeValueStrategy('escape');
+            // Sanitation is to be done on the server
+            $translateProvider.useSanitizeValueStrategy(null);
         }
     ]
 );

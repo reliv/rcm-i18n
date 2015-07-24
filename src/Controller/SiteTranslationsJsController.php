@@ -64,7 +64,7 @@ class SiteTranslationsJsController extends AbstractRestfulJsonController
     }
 
     /**
-     * prepareData
+     * prepareData Format and clean translations
      *
      * @param $result
      *
@@ -74,7 +74,7 @@ class SiteTranslationsJsController extends AbstractRestfulJsonController
     {
         $preparedData = [];
         foreach ($result as $key => $row) {
-            $preparedData[$row['defaultText']] = $row['text'];
+            $preparedData[$row['defaultText']] = strip_tags(html_entity_decode($row['text']));
         }
 
         return $preparedData;
