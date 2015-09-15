@@ -45,6 +45,7 @@ class MessagesController extends AbstractRestfulController
             $defaultText = $defaultMessage->getDefaultText();
 
             $text = null;
+            $messageId = null;
 
             foreach ($localeMessages as $localeMessage) {
                 if ($localeMessage->getDefaultText() == $defaultText) {
