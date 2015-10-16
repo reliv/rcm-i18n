@@ -1,5 +1,5 @@
 {
-  "name": "reliv/rcm-i18n",
+  "name": "rcm/i18n",
   "description": "Stores translations in DB for ZF2 i18n",
   "type": "library",
   "license": "BSD-3-Clause",
@@ -25,8 +25,8 @@
   "require": {
     "php": ">=5.4",
     "zendframework/zendframework": "2.*",
-    "reliv/rcm": "0.*",
-    "reliv/rcm-html-purifier": "0.*",
+    "rcm/core": "0.*",
+    "rcm/html-purifier": "0.*",
     "fxp/composer-asset-plugin": "~1.0",
     "bower-asset/angular-translate":"2.7.2"
   },
