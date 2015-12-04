@@ -18,7 +18,7 @@
                                     ng-model="selectedLocale"
                                     ng-options="key as value for (key , value) in locales"
                                     ng-change="OpenLocale()"
-                                    ng-disabled="loading || rcmHtmlEditorService.toolbarLoading">
+                                    ng-disabled="loading">
                                 <option value="">
                                     Please select language
                                 </option>
@@ -29,7 +29,7 @@
                         <div class="form-group">
                             <div class="input-group">
                                 <input ng-model="messageQuery"
-                                       ng-disabled="loading || rcmHtmlEditorService.toolbarLoading"
+                                       ng-disabled="loading"
                                        class="form-control"
                                        type="text"
                                        placeholder="search"
@@ -71,47 +71,27 @@
 
                                 <div class="message-cell col-2">
                                     <div class="translation">
+                                        <div class="message-editor">
+                                            <div class="message">
+                                                <div class="editor-link form-group"
+                                                     ng-class="{'error': !message.text}"
+                                                        >
+                                                    <textarea class="form-control" ng-model="message.text"
+                                                           ng-show="message.text"
+                                                            ng-change="messageChange(message)"></textarea>
+                                                    <div ng-hide="message.text">TRANSLATION MISSING</div>
+                                                </div>
+                                            </div>
+                                        </div>
                                         <div class="toolbars"
-                                             ng-class="{'editable': message.editable || message.dirty}">
+                                             ng-show="message.dirty">
                                             <div class="toolbar-save">
-                                                <button ng-class="{invisible: !message.dirty}"
-                                                        id="button-{{message.id}}"
+                                                <button id="button-{{message.id}}"
                                                         ng-click="saveText(message)"
                                                         class="btn btn-primary btn-sm">
                                                     <span class="glyphicon glyphicon-save"></span>
                                                     Save
                                                 </button>
-                                            </div>
-                                            <div class="toolbar-editor">
-                                                <div id="htmlEditorToolbar-{{message.id}}"></div>
-                                            </div>
-                                        </div>
-                                        <div class="message-editor">
-                                            <div>
-                                                <i class="glyphicon glyphicon-refresh loading"
-                                                   ng-class="{'active': editorsLoading[message.id]}"></i>
-                                            </div>
-                                            <div class="message"
-                                                 ng-hide="editorsLoading[message.id]">
-                                                <div class="editor"
-                                                     ng-class="{'dirty': message.dirty}"
-                                                     ng-show="message.editable"
-                                                     id="{{message.id}}"
-                                                     rcm-html-edit-on-click="'.editor-link'"
-                                                     html-editor-attached-toolbar
-                                                     html-editor-type="simpleText"
-                                                     html-editor-size="small"
-                                                     ng-change="messageChange(message)"
-                                                     ng-model="message.text">
-                                                </div>
-                                                <div class="editor-link"
-                                                     ng-class="{'error': !message.text}"
-                                                     ng-hide="message.editable"
-                                                        >
-                                                    <div ng-bind-html="message.textHtml"
-                                                         ng-show="message.text"></div>
-                                                    <div ng-hide="message.text">TRANSLATION MISSING</div>
-                                                </div>
                                             </div>
                                         </div>
                                     </div>

@@ -91,16 +91,7 @@
     visibility: hidden;
 }
 
-.rcmI18n .dirty {
-
-}
-
-.rcmI18n .translation {
-
-}
-
 .rcmI18n .translation .toolbars {
-    display: none;
     width: 100%;
 }
 
@@ -114,8 +105,8 @@
     padding: 0;
 }
 
-.rcmI18n .translation .toolbars .toolbar-save button {
-    float: left;
+.rcmI18n .translation .toolbars .toolbar-save {
+    float: right;
     margin: 0;
 }
 
@@ -140,9 +131,12 @@
     border: 1px solid #eeeeee;
 }
 
-
 .rcmI18n .titleTranslations {
     background-color: #F5F5F5;
+}
+
+.rcmI18n textarea {
+    height: 65px;
 }
 
 /* </rcm-i18n> */
