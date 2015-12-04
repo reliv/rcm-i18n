@@ -2,11 +2,11 @@
  * rcm-i18n-admin
  * Created by idavis on 7/2/14.
  */
-angular.module('rcmI18nAdmin', ['RcmHtmlEditor'])
+angular.module('rcmI18nAdmin', ['RcmLoading'])
     .controller(
     'rcmTranslations', [
-        '$scope', '$element', '$log', '$http', '$sce', 'rcmHtmlEditorService',
-        function ($scope, $element, $log, $http, $sce, rcmHtmlEditorService) {
+        '$scope', '$element', '$log', '$http', '$sce', 'rcmLoading',
+        function ($scope, $element, $log, $http, $sce, rcmLoading) {
             var self = this;
             self.url = {
                 locales: '/rcmi18n/locales'
@@ -14,7 +14,6 @@ angular.module('rcmI18nAdmin', ['RcmHtmlEditor'])
             $scope.locales = [];
             $scope.loading = false;//loadin ng-show set to false
             $scope.messageQuery = '';
-            $scope.rcmHtmlEditorService = rcmHtmlEditorService;
             $scope.editorsLoading = {};
             $scope.selectedLocale = null;
             $scope.messages = {};
@@ -30,53 +29,6 @@ angular.module('rcmI18nAdmin', ['RcmHtmlEditor'])
                     this.$apply(fn);
                 }
             };
-
-            // Listen for editor events
-            rcmHtmlEditorService.eventManager.on(
-                'rcmHtmlEditorService.loading.start',
-                function(args){
-                    $scope.editorsLoading[args.editorId] = true;
-                    $scope.safeApply();
-                }
-            );
-            rcmHtmlEditorService.eventManager.on(
-                'rcmHtmlEditorService.loading.end',
-                function(args){
-
-                    $scope.editorsLoading[args.editorId] = false;
-                    if($scope.messages[args.editorId]) {
-                        $scope.messages[args.editorId].editable = true;
-                        $scope.safeApply();
-                        setTimeout(
-                            function () {
-                                $('#' + args.editorId).focus();
-                            }
-                        );
-                    }
-                }
-            );
-            rcmHtmlEditorService.eventManager.on(
-                'RcmHtmlEditor.onInit',
-                function(args){
-                    args.editorInstance.on(
-                        'focus',
-                        function(e){
-                            $scope.safeApply();
-                        }
-                    );
-
-                    args.editorInstance.on(
-                        'blur',
-                        function(e){
-                            if($scope.messages[args.rcmHtmlEditor.id]) {
-                                $scope.messages[args.rcmHtmlEditor.id].editable = false;
-                                args.rcmHtmlEditor.destroy();
-                                $scope.safeApply();
-                            }
-                        }
-                    );
-                }
-            );
 
             self.getLocales = function () {
                 $scope.loading = true;//loadin ng-show set to true when getLocales is called
@@ -107,7 +59,6 @@ angular.module('rcmI18nAdmin', ['RcmHtmlEditor'])
             $scope.messageChange = function(message) {
                 message.dirty = true;
                 message.textHtml = $sce.trustAsHtml(message.text);
-
             };
 
             $scope.OpenLocale = function () {
@@ -149,7 +100,10 @@ angular.module('rcmI18nAdmin', ['RcmHtmlEditor'])
                 }
             };
 
+            var loadingKey = 'i18n';
+
             $scope.saveText = function (message) {
+                rcmLoading.setLoading(loadingKey, 0);
                 $http(
                     {
                         method: 'PUT',//method put to update selected locale
@@ -163,6 +117,7 @@ angular.module('rcmI18nAdmin', ['RcmHtmlEditor'])
                     function (data) {
                         message.dirty = false;
                         message.textHtml = $sce.trustAsHtml(message.text);
+                        rcmLoading.setLoading(loadingKey, 1);
                     }
                 ).
                     error(
