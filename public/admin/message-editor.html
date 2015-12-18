@@ -74,18 +74,17 @@
                                         <div class="message-editor">
                                             <div class="message">
                                                 <div class="editor-link form-group"
-                                                     ng-class="{'error': !message.text}"
-                                                        >
+                                                     ng-class="{'error': !message.text}">
                                                     <textarea class="form-control" ng-model="message.text"
-                                                           ng-show="message.text"
                                                             ng-change="messageChange(message)"></textarea>
-                                                    <div ng-hide="message.text">TRANSLATION MISSING</div>
+                                                    <div class="label label-warning" ng-hide="message.text">
+                                                        <i class="glyphicon glyphicon-warning-sign"></i> Translation Missing
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="toolbars"
-                                             ng-show="message.dirty">
-                                            <div class="toolbar-save">
+                                        <div class="toolbars">
+                                            <div class="toolbar-save" ng-show="message.dirty">
                                                 <button id="button-{{message.id}}"
                                                         ng-click="saveText(message)"
                                                         class="btn btn-primary btn-sm">
@@ -95,12 +94,12 @@
                                             </div>
                                         </div>
                                     </div>
-
                                 </div>
                             </div>
                         </div>
                     </form>
                 </div>
+
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default"
                             data-dismiss="modal">{{"Close"|translate}}
