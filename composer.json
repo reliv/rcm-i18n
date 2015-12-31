@@ -26,7 +26,7 @@
     "php": ">=5.4",
     "zendframework/zendframework": "2.*",
     "rcm/core": "1.*",
-    "rcm/html-purifier": "0.*",
+    "rcm/html-purifier": ">=0.*",
     "fxp/composer-asset-plugin": "~1.0",
     "bower-asset/angular-translate":"2.7.2"
   },
