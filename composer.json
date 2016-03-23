@@ -27,7 +27,7 @@
     "zendframework/zendframework": "2.*",
     "rcm/core": "1.*",
     "rcm/html-purifier": "1.*",
-    "fxp/composer-asset-plugin": "1.*",
+    "fxp/composer-asset-plugin": "~1.0",
     "bower-asset/angular-translate":"2.7.2"
   },
   "require-dev": {
