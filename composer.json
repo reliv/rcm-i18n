@@ -28,7 +28,7 @@
     "fxp/composer-asset-plugin": ">=1.1.3",
     "rcm/core": "1.*",
     "rcm/html-purifier": "1.*",
-    "bower-asset/angular-translate":"2.7.2"
+    "bower-asset/angular-translate":">=2.7.2"
   },
   "require-dev": {
     "phpunit/phpunit": "~4.0",
