@@ -69,8 +69,8 @@ class MessagesController extends AbstractRestfulController
     /**
      * Update translations
      *
-     * @param mixed $id          Id of text that need to be translated
-     * @param mixed $data        Data
+     * @param mixed $id Id of text that need to be translated
+     * @param mixed $data Data
      *
      * @return mixed|\Zend\Stdlib\ResponseInterface|JsonModel
      * @throws \Exception
@@ -81,6 +81,7 @@ class MessagesController extends AbstractRestfulController
             $response = $this->getResponse();
             $response->setStatusCode(Response::STATUS_CODE_401);
             $response->setContent($response->renderStatusLine());
+
             return $response;
         }
 
@@ -137,6 +138,7 @@ class MessagesController extends AbstractRestfulController
             $response->renderStatusLine()
             . ' - ' . $message
         );
+
         return $response;
     }
 }
