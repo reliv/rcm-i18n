@@ -29,7 +29,7 @@ return [
     'Rcm' => [
         'HtmlIncludes' => [
             'headScriptFile' => [
-                '/modules/rcm-angular-js/angular-ui/bootstrap/ui-bootstrap-0.11.0.min.js' => [],
+                '/vendor/angular-bootstrap/ui-bootstrap.min.js' => [],
                 '/vendor/angular-translate/angular-translate.min.js' => [],
                 '/rcmi18n/translations.js' => [],
             ],
@@ -61,7 +61,7 @@ return [
                 'pages' => [
                     'Translations' => [
                         'label' => 'Translations',
-                        'class' => 'RcmAdminMenu RcmBlankDialog Translations',
+                        'class' => 'rcmAdminMenu RcmBlankDialog Translations',
                         'uri' => '/modules/rcm-i18n/admin/message-editor.html',
                         'title' => 'Translations',
                     ]
