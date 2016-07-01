@@ -29,8 +29,7 @@ return [
     'Rcm' => [
         'HtmlIncludes' => [
             'headScriptFile' => [
-                '/vendor/angular-bootstrap/ui-bootstrap.min.js' => [],
-                '/vendor/angular-translate/angular-translate.min.js' => [],
+                '/bower_components/angular-translate/angular-translate.min.js' => [],
                 '/rcmi18n/translations.js' => [],
             ],
         ],
