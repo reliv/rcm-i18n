@@ -35,7 +35,7 @@ return [
             ],
             'headScriptFile' => [
                 /**
-                 * Must not be incombined scripts because this is
+                 * Must not be in combined scripts because this is
                  * a php generated list of translations
                  */
                 '/rcmi18n/translations.js' => [],
