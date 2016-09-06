@@ -91,7 +91,6 @@ class EmailMissingTranslationListener implements ListenerAggregateInterface
      */
     public function detach(EventManagerInterface $events)
     {
-
     }
 
     /**

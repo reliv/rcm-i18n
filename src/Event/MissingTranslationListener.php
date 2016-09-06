@@ -41,7 +41,7 @@ class MissingTranslationListener implements ListenerAggregateInterface
     protected $entityManager;
 
     /**
-     * @param array         $config
+     * @param array $config
      * @param EntityManager $entityManager
      */
     public function __construct($config, EntityManager $entityManager)
@@ -112,7 +112,6 @@ class MissingTranslationListener implements ListenerAggregateInterface
      */
     public function detach(EventManagerInterface $events)
     {
-
     }
 
     /**
