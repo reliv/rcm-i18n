@@ -3,9 +3,9 @@
 namespace RcmI18n\Factory;
 
 use Interop\Container\ContainerInterface;
-use RcmI18n\Service\ParameterizeTranslator;
+use RcmI18n\Service\ParameterizeHtmlTranslator;
 
-class ServiceParameterizeTranslatorFactory
+class ServiceParameterizeHtmlTranslatorFactory
 {
     /**
      * Create service
@@ -17,7 +17,8 @@ class ServiceParameterizeTranslatorFactory
     public function __invoke($container)
     {
         $translator = $container->get('MvcTranslator');
+        $htmlPurifier = $container->get('RcmHtmlPurifier');
 
-        return new ParameterizeTranslator($translator);
+        return new ParameterizeHtmlTranslator($translator, $htmlPurifier);
     }
 }

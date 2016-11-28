@@ -1,22 +1,4 @@
 <?php
-/**
- * Purifying & translating view helper
- *
- * Works like ZF2's translate view helper but it also filters web script out of the
- * translation since they came from the DB and can't be trusted not to contain
- * XSS attacks. This filtering allows translations to contain things like <br> tags
- * that would not normally make it through an escapeHtml() call.
- *
- * PHP version 5
- *
- * @category  Reliv
- * @package   RcmI18n\ViewHelper
- * @author    Rod Mcnew <rmcnew@relivinc.com>
- * @copyright 2014 Reliv International
- * @license   License.txt New BSD License
- * @version   GIT: <git_id>
- * @link      https://github.com/reliv
- */
 
 namespace RcmI18n\ViewHelper;
 
@@ -41,11 +23,12 @@ use Zend\I18n\View\Helper\AbstractTranslatorHelper;
  * @version   Release: <package_version>
  * @link      https://github.com/reliv
  */
-class TranslateHtml extends AbstractTranslatorHelper implements
-    TranslatorAwareInterface
+class TranslateHtml extends AbstractTranslatorHelper implements TranslatorAwareInterface
 {
+    /**
+     * @var \HTMLPurifier
+     */
     protected $htmlPurifier;
-    protected $editAttributeKey;
 
     /**
      * RcmEdit Constructor

@@ -2,12 +2,12 @@
 
 namespace RcmI18n\Factory;
 
-use RcmI18n\Model\Locales;
+use RcmI18n\RemoteLoader\DoctrineDbLoader;
 use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
 /**
- * LocalesFactory
+ * RemoteLoaderDoctrineDbLoaderFactory
  *
  * PHP version 5
  *
@@ -19,12 +19,23 @@ use Zend\ServiceManager\ServiceLocatorInterface;
  * @version   Release: <package_version>
  * @link      https://github.com/reliv
  */
-class LocalesFactory implements FactoryInterface
+class RemoteLoaderDoctrineDbLoaderFactory implements FactoryInterface
 {
+    /**
+     * createService
+     *
+     * @param ServiceLocatorInterface $serviceLocator
+     *
+     * @return DoctrineDbLoader
+     */
     public function createService(ServiceLocatorInterface $serviceLocator)
     {
-        return new Locales(
-            $serviceLocator->get('Doctrine\ORM\EntityManager')->getRepository('\Rcm\Entity\Site')
+        $serviceLocator = $serviceLocator->getServiceLocator();
+
+        return new DoctrineDbLoader(
+            $serviceLocator->get(
+                'Doctrine\ORM\EntityManager'
+            )
         );
     }
 }

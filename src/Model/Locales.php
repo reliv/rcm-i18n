@@ -2,65 +2,29 @@
 
 namespace RcmI18n\Model;
 
-use Rcm\Repository\Site;
-
 /**
- * Locales
+ * Interface Locales
  *
- * PHP version 5
- *
- * @category  Reliv
- * @package   RcmI18n\Model
- * @author    Rod Mcnew <rmcnew@relivinc.com>
- * @copyright 2014 Reliv International
- * @license   License.txt New BSD License
- * @version   Release: <package_version>
+ * @author    James Jervis <jjervis@relivinc.com>
+ * @copyright 2016 Reliv International
+ * @license   License.txt
  * @link      https://github.com/reliv
  */
-class Locales
+interface Locales
 {
-    protected $locales;
-
-    /**
-     * Constructor
-     *
-     * @param Site $siteRepo Rcm Site Repo
-     */
-    public function __construct(Site $siteRepo)
-    {
-        $list = [];
-
-        /** @var \Rcm\Entity\Site $site */
-        foreach ($siteRepo->getSites(true) as $site) {
-            $list[$site->getLanguage()->getIso6391()
-            . '_' . $site->getCountry()->getIso2()] = $site->getCountry()->getCountryName()
-            . ' - ' . $site->getLanguage()->getLanguageName();
-        }
-
-        $this->locales = array_unique($list);
-    }
-
     /**
      * Returns all locales used by active sites
      *
      * @return array
      */
-    public function getLocales()
-    {
-        return $this->locales;
-    }
+    public function getLocales();
 
     /**
      * Returns true if locale is valid
      *
-     * @param $locale
+     * @param string $locale
      *
      * @return boolean
      */
-    public function localeIsValid($locale)
-    {
-        $locales = $this->getLocales();
-
-        return array_key_exists($locale, $locales);
-    }
+    public function localeIsValid($locale);
 }

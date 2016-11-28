@@ -1,24 +1,11 @@
 <?php
-/**
- * LocalesTest.php
- *
- * PHP version 5
- *
- * @category  Reliv
- * @package   RcmI18nTest\Model
- * @author    Rod Mcnew <rmcnew@relivinc.com>
- * @copyright 2014 Reliv International
- * @license   License.txt New BSD License
- * @version   GIT: <git_id>
- * @link      https://github.com/reliv
- */
 
 namespace RcmI18nTest\Model;
 
 use Rcm\Entity\Country;
 use Rcm\Entity\Language;
 use Rcm\Entity\Site;
-use RcmI18n\Model\Locales;
+use RcmI18n\Model\RcmSiteLocales;
 
 require __DIR__ . '/../../autoload.php';
 
@@ -34,12 +21,12 @@ require __DIR__ . '/../../autoload.php';
  * @license   License.txt New BSD License
  * @version   Release: <package_version>
  * @link      https://github.com/reliv
- * @covers    RcmI18n\Model\Locales
+ * @covers    \RcmI18n\Model\RcmSiteLocales
  */
-class LocalesTest extends \PHPUnit_Framework_TestCase
+class RcmSiteLocalesTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var Locales
+     * @var RcmSiteLocales
      */
     protected $unit;
 
@@ -57,7 +44,7 @@ class LocalesTest extends \PHPUnit_Framework_TestCase
         $mockSiteRepo->expects($this->any())
             ->method('getSites')
             ->will($this->returnValue([$site]));
-        $this->unit = new Locales($mockSiteRepo);
+        $this->unit = new RcmSiteLocales($mockSiteRepo);
     }
 
     public function testConstructAndGetLocales()

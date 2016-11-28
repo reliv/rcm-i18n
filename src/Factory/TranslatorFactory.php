@@ -1,25 +1,9 @@
 <?php
-/**
- * MvcTranslatorFactory.php
- *
- * LongDescHere
- *
- * PHP version 5
- *
- * @category  Reliv
- * @package   src\RcmI18n
- * @author    Rod Mcnew <rmcnew@relivinc.com>
- * @copyright 2014 Reliv International
- * @license   License.txt New BSD License
- * @version   GIT: <git_id>
- * @link      https://github.com/reliv
- */
 
 namespace RcmI18n\Factory;
 
-use RcmI18n\RemoteLoader\Database;
+use Interop\Container\ContainerInterface;
 use Zend\I18n\Translator\Translator;
-use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
 /**
@@ -37,11 +21,18 @@ use Zend\ServiceManager\ServiceLocatorInterface;
  * @version   Release: <package_version>
  * @link      https://github.com/reliv
  */
-class TranslatorFactory implements FactoryInterface
+class TranslatorFactory
 {
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    /**
+     * __invoke
+     *
+     * @param ContainerInterface|ServiceLocatorInterface $container
+     *
+     * @return \Zend\Mvc\I18n\Translator
+     */
+    public function __invoke($container)
     {
-        $config = $serviceLocator->get('config');
+        $config = $container->get('config');
         $translator = Translator::factory($config['translator']);
 
         /**
@@ -50,7 +41,7 @@ class TranslatorFactory implements FactoryInterface
          */
         foreach ($config['translator_plugins']['factories'] as $name => &$factory) {
             $pluginManager = $translator->getPluginManager();
-            $pluginManager->setServiceLocator($serviceLocator);
+            $pluginManager->setServiceLocator($container);
             $pluginManager->setFactory(
                 $name,
                 $factory
@@ -61,8 +52,8 @@ class TranslatorFactory implements FactoryInterface
         /* Register listener if configured */
         $translationListener = $config['RcmI18n']['translationListener'];
 
-        if (!empty($translationListener) && $serviceLocator->has($translationListener)) {
-            $listener = $serviceLocator->get(
+        if (!empty($translationListener) && $container->has($translationListener)) {
+            $listener = $container->get(
                 $translationListener
             );
             $event = $translator->getEventManager();

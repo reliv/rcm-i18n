@@ -26,3 +26,8 @@ Result:
     "term2": "term2 translation"
 }
 ```
+
+#### ToDo ####
+
+- Complete the Zend Expressive part 
+    - Need to register translator plugins with ZF2 application
