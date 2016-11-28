@@ -18,122 +18,7 @@
  */
 
 return [
-
-    'RcmI18n' => [
-        'defaultLocale' => 'en_US',
-        /* register a translation listener or null if no listener required
-            Example: 'translationListener' => 'RcmI18n\Event\MissingTranslationListener'
-        */
-        'translationListener' => null,
-    ],
-    'Rcm' => [
-        'HtmlIncludes' => [
-            'scripts' => [
-                'libraries' => [
-                    '/bower_components/angular-translate/angular-translate.min.js' => [],
-                ],
-            ],
-            'headScriptFile' => [
-                /**
-                 * Must not be in combined scripts because this is
-                 * a php generated list of translations
-                 */
-                '/rcmi18n/translations.js' => [],
-            ],
-        ],
-    ],
-    'RcmUser' => [
-        'Acl\Config' => [
-            'ResourceProviders' => [
-                'RcmI18nTranslations' => [
-                    'translations' => [
-                        'resourceId' => 'translations',
-                        'parentResourceId' => null,
-                        'privileges' => [
-                            'read',
-                            'update',
-                            'create',
-                            'delete',
-                        ],
-                        'name' => 'Translations',
-                        'description' => 'Creating translations for other countries',
-                    ]
-                ]
-            ]
-        ]
-    ],
-    'navigation' => [
-        'RcmAdminMenu' => [
-            'Site' => [
-                'pages' => [
-                    'Translations' => [
-                        'label' => 'Translations',
-                        'class' => 'rcmAdminMenu RcmBlankDialog Translations',
-                        'uri' => '/modules/rcm-i18n/admin/message-editor.html',
-                        'title' => 'Translations',
-                    ]
-                ]
-            ],
-        ]
-    ],
-    'translator' => [
-        'locale' => 'en_US',
-        'event_manager_enabled' => true,
-        'remote_translation' => [
-            [
-                'type' => 'RcmI18n\DbLoader',
-            ],
-        ],
-    ],
-    /**
-     * Can be removed after ZF2 PR
-     */
-    'service_manager' => [
-        'factories' => [
-            'MvcTranslator' =>
-                'RcmI18n\Factory\TranslatorFactory',
-            'RcmI18n\Model\Locales' =>
-                'RcmI18n\Factory\LocalesFactory',
-            /* This listener auto adds missing translations to the DB */
-            'RcmI18n\Event\MissingTranslationListener' =>
-                'RcmI18n\Factory\MissingTranslationListenerFactory',
-            'RcmI18n\Service\ParameterizeTranslator' =>
-                'RcmI18n\Factory\ServiceParameterizeTranslatorFactory',
-        ]
-    ],
-    'translator_plugins' => [
-        'factories' => [
-            'RcmI18n\DbLoader' => 'RcmI18n\Factory\LoaderFactory',
-        ]
-    ],
-    'doctrine' => [
-        'connection' => [
-            'orm_default' => [
-                'driverClass' => 'Doctrine\DBAL\Driver\PDOMySql\Driver',
-                'params' => [
-                    'charset' => 'UTF8'
-                ],
-            ]
-        ],
-        'driver' => [
-            'RcmI18n' => [
-                'class' => 'Doctrine\ORM\Mapping\Driver\AnnotationDriver',
-                'cache' => 'array',
-                'paths' => [
-                    __DIR__ . '/../src/Entity'
-                ]
-            ],
-            'orm_default' => [
-                'drivers' => [
-                    'RcmI18n' => 'RcmI18n'
-                ]
-            ]
-            /**
-             * NOTE: SOME KIND OF DOCTRINE UTF8 SETTING IS REQUIRED HERE OR
-             * FRENCH CHARACTERS WILL NOT DISPLAY CORRECTLY IN BROWSERS
-             */
-        ],
-    ],
+    'asset_manager' => require(__DIR__ . '/asset_manager.php'),
     'controllers' => [
         'invokables' => [
             'RcmI18n\Controller\Locale' =>
@@ -152,6 +37,11 @@ return [
             'paramTranslate' => 'RcmI18n\Factory\ControllerPluginParamTranslatorFactory',
         ],
     ],
+    'doctrine' => require(__DIR__ . '/doctrine.php'),
+    'RcmI18n' => require(__DIR__ . '/rcm-i18n.php'),
+    'Rcm' => require(__DIR__ . '/rcm.php'),
+    'RcmUser' => require(__DIR__ . '/rcm-user.php'),
+    'navigation' => require(__DIR__ . '/navigation.php'),
     'router' => [
         'routes' => [
             'RcmI18n\Locale' => [
@@ -193,6 +83,36 @@ return [
             ],
         ]
     ],
+    /**
+     * Can be removed after ZF2 PR
+     */
+    'service_manager' => [
+        'factories' => [
+            'MvcTranslator' =>
+                'RcmI18n\Factory\TranslatorFactory',
+            'RcmI18n\Model\Locales' =>
+                'RcmI18n\Factory\LocalesFactory',
+            /* This listener auto adds missing translations to the DB */
+            'RcmI18n\Event\MissingTranslationListener' =>
+                'RcmI18n\Factory\MissingTranslationListenerFactory',
+            'RcmI18n\Service\ParameterizeTranslator' =>
+                'RcmI18n\Factory\ServiceParameterizeTranslatorFactory',
+        ]
+    ],
+    'translator' => [
+        'locale' => 'en_US',
+        'event_manager_enabled' => true,
+        'remote_translation' => [
+            [
+                'type' => 'RcmI18n\DbLoader',
+            ],
+        ],
+    ],
+    'translator_plugins' => [
+        'factories' => [
+            'RcmI18n\DbLoader' => 'RcmI18n\Factory\LoaderFactory',
+        ]
+    ],
     'view_helpers' => [
         'factories' => [
             'translate' => 'RcmI18n\Factory\TranslateHtmlFactory',
@@ -205,25 +125,6 @@ return [
         ],
         'strategies' => [
             'ViewJsonStrategy',
-        ],
-    ],
-    'asset_manager' => [
-        'resolver_configs' => [
-            'aliases' => [
-                'modules/rcm-i18n/' => __DIR__ . '/../public/',
-            ],
-            'collections' => [
-
-                'modules/rcm/modules.js' => [
-                    'modules/rcm-i18n/rcm-i18n.js',
-                ],
-                'modules/rcm-admin/admin.js' => [
-                    'modules/rcm-i18n/admin/rcm-i18n-admin.js',
-                ],
-                'modules/rcm-admin/admin.css' => [
-                    'modules/rcm-i18n/admin/styles.css'
-                ],
-            ],
         ],
     ],
 ];
