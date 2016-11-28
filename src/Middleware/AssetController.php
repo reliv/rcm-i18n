@@ -3,7 +3,6 @@
 namespace RcmI18n\Middleware;
 
 use Psr\Http\Message\ResponseInterface;
-use Zend\Expressive\Router\RouteResult;
 use Zend\Stratigility\Http\Request;
 
 /**
@@ -16,6 +15,11 @@ use Zend\Stratigility\Http\Request;
  */
 class AssetController
 {
+    /**
+     *
+     */
+    const PARAM_FILE_PATH = 'fileName';
+
     /**
      * @var string
      */
@@ -118,18 +122,9 @@ class AssetController
      */
     protected function getFileName(Request $request)
     {
-        /** @var RouteResult $routeResult */
-        $routeResult = $request->getAttribute(
-            RouteResult::class
+        return $request->getAttribute(
+            self::PARAM_FILE_PATH
         );
-
-        $params = $routeResult->getMatchedParams();
-
-        if (array_key_exists('fileName', $params)) {
-            return $params['fileName'];
-        }
-
-        return null;
     }
 
     /**
