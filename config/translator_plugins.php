@@ -4,6 +4,6 @@
  */
 return [
     'factories' => [
-        'RcmI18n\DbLoader' => 'RcmI18n\Factory\RemoteLoaderDoctrineDbLoaderFactory',
+        RcmI18n\RemoteLoader\RemoteLoader::class => 'RcmI18n\Factory\RemoteLoaderDoctrineDbLoaderFactory',
     ]
 ];

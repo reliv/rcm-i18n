@@ -7,7 +7,7 @@ return [
     'event_manager_enabled' => true,
     'remote_translation' => [
         [
-            'type' => 'RcmI18n\DbLoader',
+            'type' => RcmI18n\RemoteLoader\RemoteLoader::class,
         ],
     ],
 ];
