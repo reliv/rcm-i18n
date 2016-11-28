@@ -33,6 +33,16 @@ class ParameterizeHtmlTranslator extends ParameterizeTranslator
         parent::__construct($translator);
     }
 
+    /**
+     * translate
+     *
+     * @param string $message
+     * @param array  $params
+     * @param string $textDomain
+     * @param null   $locale
+     *
+     * @return string
+     */
     public function translate(
         $message,
         $params = [],
