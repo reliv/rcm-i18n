@@ -1,19 +1,4 @@
 <?php
-/**
- * Doctrine Db Loader
- *
- * Uses doctrine to grab translations from the DB that are compatible with ZF2 I18n
- *
- * PHP version 5
- *
- * @category  Reliv
- * @package   RcmI18n
- * @author    Rod Mcnew <rmcnew@relivinc.com>
- * @copyright 2014 Reliv International
- * @license   License.txt New BSD License
- * @version   GIT: <git_id>
- * @link      https://github.com/reliv
- */
 
 namespace RcmI18n\RemoteLoader;
 
@@ -36,11 +21,18 @@ use Zend\I18n\Translator\TextDomain;
  * @version   Release: <package_version>
  * @link      https://github.com/reliv
  */
-class DoctrineDbLoader implements RemoteLoaderInterface
+class DoctrineDbLoader implements RemoteLoader
 {
-
+    /**
+     * @var EntityManager
+     */
     protected $entityMgr;
 
+    /**
+     * DoctrineDbLoader constructor.
+     *
+     * @param EntityManager $entityMgr
+     */
     public function __construct(EntityManager $entityMgr)
     {
         $this->entityMgr = $entityMgr;

@@ -1,16 +1,13 @@
 <?php
 
-
 namespace RcmI18n\Factory;
 
+use Interop\Container\ContainerInterface;
 use RcmI18n\Event\MissingTranslationListener;
-use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
 /**
  * Class MissingTranslationListenerFactory
- *
- * LongDescHere
  *
  * PHP version 5
  *
@@ -22,20 +19,20 @@ use Zend\ServiceManager\ServiceLocatorInterface;
  * @version   Release: <package_version>
  * @link      https://github.com/reliv
  */
-class MissingTranslationListenerFactory implements FactoryInterface
+class MissingTranslationListenerFactory
 {
     /**
      * createService
      *
-     * @param ServiceLocatorInterface $serviceLocator
+     * @param ContainerInterface|ServiceLocatorInterface $container
      *
      * @return MissingTranslationListener
      */
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function __invoke($container)
     {
-        $config = $serviceLocator->get('config');
+        $config = $container->get('config');
         /** @var \Doctrine\ORM\EntityManager $entityManager */
-        $entityManager = $serviceLocator->get('Doctrine\ORM\EntityManager');
+        $entityManager = $container->get('Doctrine\ORM\EntityManager');
 
         return new MissingTranslationListener($config, $entityManager);
     }

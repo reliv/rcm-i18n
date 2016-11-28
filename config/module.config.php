@@ -18,7 +18,13 @@
  */
 
 return [
+    /**
+     * asset_manager
+     */
     'asset_manager' => require(__DIR__ . '/asset_manager.php'),
+    /**
+     * controllers
+     */
     'controllers' => [
         'invokables' => [
             'RcmI18n\Controller\Locale' =>
@@ -32,16 +38,37 @@ return [
 
         ]
     ],
+    /**
+     * controller_plugins
+     */
     'controller_plugins' => [
         'factories' => [
             'paramTranslate' => 'RcmI18n\Factory\ControllerPluginParamTranslatorFactory',
         ],
     ],
+    /**
+     * doctrine
+     */
     'doctrine' => require(__DIR__ . '/doctrine.php'),
+    /**
+     * RcmI18n
+     */
     'RcmI18n' => require(__DIR__ . '/rcm-i18n.php'),
+    /**
+     * Rcm
+     */
     'Rcm' => require(__DIR__ . '/rcm.php'),
+    /**
+     * RcmUser
+     */
     'RcmUser' => require(__DIR__ . '/rcm-user.php'),
+    /**
+     * navigation
+     */
     'navigation' => require(__DIR__ . '/navigation.php'),
+    /**
+     * router
+     */
     'router' => [
         'routes' => [
             'RcmI18n\Locale' => [
@@ -84,41 +111,29 @@ return [
         ]
     ],
     /**
-     * Can be removed after ZF2 PR
+     * service_manager
      */
-    'service_manager' => [
-        'factories' => [
-            'MvcTranslator' =>
-                'RcmI18n\Factory\TranslatorFactory',
-            'RcmI18n\Model\Locales' =>
-                'RcmI18n\Factory\LocalesFactory',
-            /* This listener auto adds missing translations to the DB */
-            'RcmI18n\Event\MissingTranslationListener' =>
-                'RcmI18n\Factory\MissingTranslationListenerFactory',
-            'RcmI18n\Service\ParameterizeTranslator' =>
-                'RcmI18n\Factory\ServiceParameterizeTranslatorFactory',
-        ]
-    ],
-    'translator' => [
-        'locale' => 'en_US',
-        'event_manager_enabled' => true,
-        'remote_translation' => [
-            [
-                'type' => 'RcmI18n\DbLoader',
-            ],
-        ],
-    ],
-    'translator_plugins' => [
-        'factories' => [
-            'RcmI18n\DbLoader' => 'RcmI18n\Factory\LoaderFactory',
-        ]
-    ],
+    'service_manager' => require(__DIR__ . '/dependencies.php'),
+    /**
+     * translator
+     */
+    'translator' => require(__DIR__ . '/translator.php'),
+    /**
+     * translator_plugins
+     */
+    'translator_plugins' => require(__DIR__ . '/translator_plugins.php'),
+    /**
+     * view_helpers
+     */
     'view_helpers' => [
         'factories' => [
-            'translate' => 'RcmI18n\Factory\TranslateHtmlFactory',
+            'translate' => 'RcmI18n\Factory\ViewHelperTranslateHtmlFactory',
             'paramTranslate' => 'RcmI18n\Factory\ViewHelperParamTranslatorFactory',
         ]
     ],
+    /**
+     * view_manager
+     */
     'view_manager' => [
         'template_path_stack' => [
             __DIR__ . '/../view',
