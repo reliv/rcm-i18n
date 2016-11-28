@@ -28,7 +28,7 @@ class AssetController
         = [
             '_default' => [
                 'headers' => [
-                    'content-type' => 'text/text'
+                    'content-type' => 'text/plain'
                 ],
             ],
             'css' => [
