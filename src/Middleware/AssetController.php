@@ -88,7 +88,7 @@ class AssetController
             return $this->headerMap[$fileExtension];
         }
 
-        return null;
+        return $this->headerMap['_default'];
     }
 
     /**
