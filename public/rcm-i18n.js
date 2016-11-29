@@ -24,6 +24,9 @@ angular.module('rcmI18n', ['pascalprecht.translate'])
     ]
 );
 
-rcm.addAngularModule(
-    'rcmI18n'
-);
+if (typeof rcm != 'undefined') {
+    rcm.addAngularModule(
+        'rcmI18n'
+    );
+}
+
