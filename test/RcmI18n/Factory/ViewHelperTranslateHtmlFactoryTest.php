@@ -2,16 +2,16 @@
 
 namespace RcmI18nTest\ViewHelper;
 
-use RcmI18n\Factory\TranslateHtmlFactory;
+use RcmI18n\Factory\ViewHelperTranslateHtmlFactory;
 use Zend\I18n\Translator\LoaderPluginManager;
 use Zend\ServiceManager\ServiceManager;
 
 require __DIR__ . '/../../autoload.php';
 
-class TranslateHtmlFactoryTest extends \PHPUnit_Framework_TestCase
+class ViewHelperTranslateHtmlFactoryTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers RcmI18n\Factory\TranslateHtmlFactory
+     * @covers \RcmI18n\Factory\ViewHelperTranslateHtmlFactory
      */
     function testCreateService()
     {
@@ -25,7 +25,7 @@ class TranslateHtmlFactoryTest extends \PHPUnit_Framework_TestCase
         );
         $viewSm = new LoaderPluginManager();
         $viewSm->setServiceLocator($sm);
-        $unit = new TranslateHtmlFactory();
+        $unit = new ViewHelperTranslateHtmlFactory();
         $this->assertInstanceOf(
             'RcmI18n\ViewHelper\TranslateHtml',
             $unit->createService($viewSm)

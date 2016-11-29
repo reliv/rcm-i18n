@@ -2,16 +2,16 @@
 
 namespace RcmI18nTest\RemoteLoader;
 
-use RcmI18n\Factory\LoaderFactory;
+use RcmI18n\Factory\RemoteLoaderDoctrineDbLoaderFactory;
 use Zend\I18n\Translator\LoaderPluginManager;
 use Zend\ServiceManager\ServiceManager;
 
 require __DIR__ . '/../../autoload.php';
 
-class LoaderFactoryTest extends \PHPUnit_Framework_TestCase
+class RemoteLoaderDoctrineDbLoaderFactoryTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @covers RcmI18n\Factory\LoaderFactory
+     * @covers \RcmI18n\Factory\RemoteLoaderDoctrineDbLoaderFactory
      */
     function testCreateService()
     {
@@ -24,7 +24,7 @@ class LoaderFactoryTest extends \PHPUnit_Framework_TestCase
         );
         $loadPluginMgr = new LoaderPluginManager();
         $loadPluginMgr->setServiceLocator($sm);
-        $unit = new LoaderFactory();
+        $unit = new RemoteLoaderDoctrineDbLoaderFactory();
         $this->assertInstanceOf(
             'RcmI18n\RemoteLoader\DoctrineDbLoader',
             $unit->createService($loadPluginMgr)
