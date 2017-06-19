@@ -43,11 +43,16 @@
                         </div>
                     </div>
                     <div class="col-sm-2">
-                        <div class="checkbox">
-                            <input ng-model="messageWithoutTranslation"
-                                   ng-disabled="loading"
-                                   type="checkbox"
-                            /> Untranslated
+                        <div class="form-group">
+                            <div class="input-group">
+                                <select class="form-control"
+                                        name="i18nMessageFilterType"
+                                        id="i18nMessageFilterType"
+                                        ng-disabled="loading"
+                                        ng-options="option.value as option.label for option in filterTypes"
+                                        ng-model="filterType">
+                                </select>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -74,7 +79,7 @@
                             </div>
 
                             <div class="message-row"
-                                 ng-repeat="message in messages | rcmi18nMessageFilter:messageQuery | rcmi18nMessageWithoutTranslationsFilter:messageWithoutTranslation">
+                                 ng-repeat="message in messages | rcmi18nMessageFilter:messageQuery | rcmi18nMessageFilterTypeFilter:filterType">
 
                                 <div class="message-cell col-1 default-text">
                                     {{message.defaultText}}

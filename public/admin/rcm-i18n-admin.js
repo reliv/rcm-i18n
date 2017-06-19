@@ -34,7 +34,17 @@ angular.module('rcmI18nAdmin').controller(
             $scope.selectedLocale = null;
             $scope.messages = {};
             $scope.translations = false;
-            $scope.messageWithoutTranslation = false;
+            $scope.filterType = null;
+            $scope.filterTypes = [
+                {
+                    label: 'All',
+                    value: null,
+                },
+                {
+                    label: 'Untranslated',
+                    value: 'untranslated',
+                }
+            ];
 
             $scope.safeApply = function (fn) {
                 var phase = this.$root.$$phase;
@@ -186,18 +196,18 @@ angular.module('rcmI18nAdmin').filter(
 );
 
 angular.module('rcmI18nAdmin').filter(
-    'rcmi18nMessageWithoutTranslationsFilter',
+    'rcmi18nMessageFilterTypeFilter',
     function () { //search for text and Default text
 
-        return function (input, query) {
-            if (!query) {
+        return function (input, filterType) {
+            if (!filterType) {
                 return input
             }
             var result = {};
             angular.forEach(
                 input,
                 function (message) {
-                    if (!message.hasTranslation) {
+                    if (filterType == 'untranslated' && !message.hasTranslation) {
                         result[message.id] = message;
                     }
                 }
