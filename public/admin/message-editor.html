@@ -13,7 +13,7 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-sm-6">
+                    <div class="col-sm-5">
                         <div class="form-group">
                             <select class="form-control"
                                     ng-model="selectedLocale"
@@ -26,7 +26,7 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col-sm-6">
+                    <div class="col-sm-5">
                         <div class="form-group">
                             <div class="input-group">
                                 <input ng-model="messageQuery"
@@ -36,7 +36,22 @@
                                        placeholder="search"
                                 />
 
-                                <div class="input-group-addon glyphicon glyphicon-search"></div>
+                                <div class="input-group-addon">
+                                    <span class="glyphicon glyphicon-search"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <select class="form-control"
+                                        name="i18nMessageFilterType"
+                                        id="i18nMessageFilterType"
+                                        ng-disabled="loading"
+                                        ng-options="option.value as option.label for option in filterTypes"
+                                        ng-model="filterType">
+                                </select>
                             </div>
                         </div>
                     </div>
@@ -64,7 +79,7 @@
                             </div>
 
                             <div class="message-row"
-                                 ng-repeat="message in messages | rcmi18nMessageFilter:messageQuery">
+                                 ng-repeat="message in messages | rcmi18nMessageFilter:messageQuery | rcmi18nMessageFilterTypeFilter:filterType">
 
                                 <div class="message-cell col-1 default-text">
                                     {{message.defaultText}}
@@ -80,7 +95,7 @@
                                                               ng-model="message.text"
                                                               ng-change="messageChange(message)"></textarea>
                                                     <div class="label label-warning"
-                                                         ng-hide="message.text!==null && message.text!==''">
+                                                         ng-hide="message.hasTranslation">
                                                         <i class="glyphicon glyphicon-warning-sign"></i> Translation Missing
                                                     </div>
                                                 </div>

@@ -2,11 +2,27 @@
  * rcm-i18n-admin
  * Created by idavis on 7/2/14.
  */
-angular.module('rcmI18nAdmin', ['RcmLoading'])
-    .controller(
+angular.module('rcmI18nAdmin', ['RcmLoading']);
+
+/**
+ * Controller
+ */
+angular.module('rcmI18nAdmin').controller(
     'rcmTranslations', [
-        '$scope', '$element', '$log', '$http', '$sce', 'rcmLoading',
-        function ($scope, $element, $log, $http, $sce, rcmLoading) {
+        '$scope',
+        '$element',
+        '$log',
+        '$http',
+        '$sce',
+        'rcmLoading',
+        function (
+            $scope,
+            $element,
+            $log,
+            $http,
+            $sce,
+            rcmLoading
+        ) {
             var self = this;
             self.url = {
                 locales: '/rcmi18n/locales'
@@ -18,11 +34,22 @@ angular.module('rcmI18nAdmin', ['RcmLoading'])
             $scope.selectedLocale = null;
             $scope.messages = {};
             $scope.translations = false;
+            $scope.filterType = null;
+            $scope.filterTypes = [
+                {
+                    label: 'All',
+                    value: null,
+                },
+                {
+                    label: 'Untranslated',
+                    value: 'untranslated',
+                }
+            ];
 
-            $scope.safeApply = function(fn) {
+            $scope.safeApply = function (fn) {
                 var phase = this.$root.$$phase;
-                if(phase == '$apply' || phase == '$digest') {
-                    if(fn && (typeof(fn) === 'function')) {
+                if (phase == '$apply' || phase == '$digest') {
+                    if (fn && (typeof(fn) === 'function')) {
                         fn();
                     }
                 } else {
@@ -33,8 +60,13 @@ angular.module('rcmI18nAdmin', ['RcmLoading'])
             self.getLocales = function () {
                 $scope.loading = true;//loadin ng-show set to true when getLocales is called
 
-                $http({method: 'GET', url: self.url.locales}).//method get to get all locales
-                    success(
+                $http(
+                    {
+                        method: 'GET',
+                        url: self.url.locales
+                    }
+                ).//method get to get all locales
+                success(
                     function (data) {
                         $scope.locales = data.locales;
                         $scope.selectedLocale = data['currentSiteLocale'];
@@ -43,8 +75,7 @@ angular.module('rcmI18nAdmin', ['RcmLoading'])
                         // this callback will be called asynchronously
                         // when the response is available
                     }
-                ).
-                    error(
+                ).error(
                     function () {
                         $scope.loading = false;
                         // called asynchronously if an error occurs
@@ -56,7 +87,7 @@ angular.module('rcmI18nAdmin', ['RcmLoading'])
 
             self.getLocales();
 
-            $scope.messageChange = function(message) {
+            $scope.messageChange = function (message) {
                 message.dirty = true;
                 message.textHtml = $sce.trustAsHtml(message.text);
             };
@@ -72,23 +103,23 @@ angular.module('rcmI18nAdmin', ['RcmLoading'])
                             url: '/rcmi18n/messages/'
                             + encodeURIComponent($scope.selectedLocale)
                         }
-                    ).
-                        success(
+                    ).success(
                         function (data) {
                             //adding id to match up keys
                             var id = '';
                             angular.forEach(
-                                data, function (value, key) {
+                                data,
+                                function (value, key) {
                                     id = 'trans' + key;
                                     value.id = id;
                                     value.textHtml = $sce.trustAsHtml(value.text);
+                                    value.hasTranslation = (value.text && value.text != '');
                                     $scope.messages[id] = value;
                                 }
                             );
                             $scope.loading = false;
                         }
-                    ).
-                        error(
+                    ).error(
                         function () {
                             alert('Couldn\'t load messages!');
                             $scope.loading = false;
@@ -112,15 +143,14 @@ angular.module('rcmI18nAdmin', ['RcmLoading'])
                         + '/' + encodeURIComponent(message['messageId']),
                         data: message
                     }
-                ).
-                    success(
+                ).success(
                     function (data) {
                         message.dirty = false;
                         message.textHtml = $sce.trustAsHtml(message.text);
+                        message.hasTranslation = (message.text && message.text != '');
                         rcmLoading.setLoading(loadingKey, 1);
                     }
-                ).
-                    error(
+                ).error(
                     function () {
                         alert('Couldn\'t save!');
                         // called asynchronously if an error occurs
@@ -130,8 +160,12 @@ angular.module('rcmI18nAdmin', ['RcmLoading'])
             }
         }
     ]
-)
-    .filter(
+);
+
+/**
+ * Controller
+ */
+angular.module('rcmI18nAdmin').filter(
     'rcmi18nMessageFilter',
     function () { //search for text and Default text
 
@@ -148,7 +182,8 @@ angular.module('rcmI18nAdmin', ['RcmLoading'])
             }
             var result = {};
             angular.forEach(
-                input, function (message) {
+                input,
+                function (message) {
                     if (compareStr(message['defaultText'], query) || compareStr(message.text, query)) {
                         result[message.id] = message;
                     }
@@ -159,6 +194,30 @@ angular.module('rcmI18nAdmin', ['RcmLoading'])
         };
     }
 );
+
+angular.module('rcmI18nAdmin').filter(
+    'rcmi18nMessageFilterTypeFilter',
+    function () { //search for text and Default text
+
+        return function (input, filterType) {
+            if (!filterType) {
+                return input
+            }
+            var result = {};
+            angular.forEach(
+                input,
+                function (message) {
+                    if (filterType == 'untranslated' && !message.hasTranslation) {
+                        result[message.id] = message;
+                    }
+                }
+            );
+
+            return result;
+        };
+    }
+);
+
 
 rcm.addAngularModule(
     'rcmI18nAdmin'
