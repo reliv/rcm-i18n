@@ -13,7 +13,7 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-sm-6">
+                    <div class="col-sm-5">
                         <div class="form-group">
                             <select class="form-control"
                                     ng-model="selectedLocale"
@@ -26,7 +26,7 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col-sm-6">
+                    <div class="col-sm-5">
                         <div class="form-group">
                             <div class="input-group">
                                 <input ng-model="messageQuery"
@@ -36,8 +36,18 @@
                                        placeholder="search"
                                 />
 
-                                <div class="input-group-addon glyphicon glyphicon-search"></div>
+                                <div class="input-group-addon">
+                                    <span class="glyphicon glyphicon-search"></span>
+                                </div>
                             </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-2">
+                        <div class="checkbox">
+                            <input ng-model="messageWithoutTranslation"
+                                   ng-disabled="loading"
+                                   type="checkbox"
+                            /> Untranslated
                         </div>
                     </div>
                 </div>
@@ -64,7 +74,7 @@
                             </div>
 
                             <div class="message-row"
-                                 ng-repeat="message in messages | rcmi18nMessageFilter:messageQuery">
+                                 ng-repeat="message in messages | rcmi18nMessageFilter:messageQuery | rcmi18nMessageWithoutTranslationsFilter:messageWithoutTranslation">
 
                                 <div class="message-cell col-1 default-text">
                                     {{message.defaultText}}
