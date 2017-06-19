@@ -90,7 +90,7 @@
                                                               ng-model="message.text"
                                                               ng-change="messageChange(message)"></textarea>
                                                     <div class="label label-warning"
-                                                         ng-hide="message.text!==null && message.text!==''">
+                                                         ng-hide="message.hasTranslation">
                                                         <i class="glyphicon glyphicon-warning-sign"></i> Translation Missing
                                                     </div>
                                                 </div>
