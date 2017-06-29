@@ -2,25 +2,29 @@
 
 namespace RcmI18n\Factory;
 
+use Interop\Container\ContainerInterface;
 use RcmI18n\Controller\Plugin\ParamTranslate;
-use Zend\ServiceManager\FactoryInterface;
+use Zend\Mvc\Controller\PluginManager;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
-class ControllerPluginParamTranslatorFactory implements FactoryInterface
+class ControllerPluginParamTranslatorFactory
 {
     /**
-     * Create service
+     * __invoke
      *
-     * @param ServiceLocatorInterface $pluginServiceManager
+     * @param $container ContainerInterface|ServiceLocatorInterface|PluginManager
      *
-     * @return mixed
+     * @return ParamTranslate
      */
-    public function createService(ServiceLocatorInterface $pluginServiceManager)
+    public function __invoke($container)
     {
-        $serviceLocator = $pluginServiceManager->getServiceLocator();
+        // @BC for ZendFramework
+        if ($container instanceof PluginManager) {
+            $container = $container->getServiceLocator();
+        }
 
-        $paramTranslator = $serviceLocator->get(
-            'RcmI18n\Service\ParameterizeTranslator'
+        $paramTranslator = $container->get(
+            \RcmI18n\Service\ParameterizeTranslator::class
         );
 
         return new ParamTranslate($paramTranslator);

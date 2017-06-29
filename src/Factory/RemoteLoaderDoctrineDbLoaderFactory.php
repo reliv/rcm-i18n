@@ -2,8 +2,9 @@
 
 namespace RcmI18n\Factory;
 
+use Interop\Container\ContainerInterface;
 use RcmI18n\RemoteLoader\DoctrineDbLoader;
-use Zend\ServiceManager\FactoryInterface;
+use Zend\I18n\Translator\LoaderPluginManager;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
 /**
@@ -19,21 +20,24 @@ use Zend\ServiceManager\ServiceLocatorInterface;
  * @version   Release: <package_version>
  * @link      https://github.com/reliv
  */
-class RemoteLoaderDoctrineDbLoaderFactory implements FactoryInterface
+class RemoteLoaderDoctrineDbLoaderFactory
 {
     /**
-     * createService
+     * __invoke
      *
-     * @param ServiceLocatorInterface $serviceLocator
+     * @param $container ContainerInterface|ServiceLocatorInterface|LoaderPluginManager
      *
      * @return DoctrineDbLoader
      */
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function __invoke($container)
     {
-        $serviceLocator = $serviceLocator->getServiceLocator();
+        // @BC for ZendFramework
+        if ($container instanceof LoaderPluginManager) {
+            $container = $container->getServiceLocator();
+        }
 
         return new DoctrineDbLoader(
-            $serviceLocator->get(
+            $container->get(
                 'Doctrine\ORM\EntityManager'
             )
         );
