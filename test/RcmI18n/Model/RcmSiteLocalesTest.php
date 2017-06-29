@@ -32,11 +32,11 @@ class RcmSiteLocalesTest extends \PHPUnit_Framework_TestCase
 
     public function setup()
     {
-        $country = new Country();
+        $country = new Country('user123');
         $country->setIso2('US');
-        $lang = new Language();
+        $lang = new Language('user123');
         $lang->setIso6391('en');
-        $site = new Site();
+        $site = new Site('user123');
         $site->setCountry($country);
         $site->setLanguage($lang);
         $mockSiteRepo = $this->getMockBuilder('\Rcm\Repository\Site')

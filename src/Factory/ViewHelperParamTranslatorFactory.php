@@ -2,25 +2,29 @@
 
 namespace RcmI18n\Factory;
 
+use Interop\Container\ContainerInterface;
 use RcmI18n\ViewHelper\ParamTranslate;
-use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\View\HelperPluginManager;
 
-class ViewHelperParamTranslatorFactory implements FactoryInterface
+class ViewHelperParamTranslatorFactory
 {
     /**
-     * Create service
+     * __invoke
      *
-     * @param ServiceLocatorInterface $viewServiceManager
+     * @param $container ContainerInterface|ServiceLocatorInterface|HelperPluginManager
      *
-     * @return mixed
+     * @return ParamTranslate
      */
-    public function createService(ServiceLocatorInterface $viewServiceManager)
+    public function __invoke($container)
     {
-        $serviceLocator = $viewServiceManager->getServiceLocator();
+        // @BC for ZendFramework
+        if ($container instanceof HelperPluginManager) {
+            $container = $container->getServiceLocator();
+        }
 
-        $paramTranslator = $serviceLocator->get(
-            'RcmI18n\Service\ParameterizeTranslator'
+        $paramTranslator = $container->get(
+            \RcmI18n\Service\ParameterizeTranslator::class
         );
 
         return new ParamTranslate($paramTranslator);

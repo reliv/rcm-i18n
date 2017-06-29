@@ -2,9 +2,10 @@
 
 namespace RcmI18n\Factory;
 
+use Interop\Container\ContainerInterface;
 use RcmI18n\ViewHelper\TranslateHtml;
-use Zend\ServiceManager\FactoryInterface;
 use Zend\ServiceManager\ServiceLocatorInterface;
+use Zend\View\HelperPluginManager;
 
 /**
  * TranslateHtmlFactory
@@ -21,20 +22,24 @@ use Zend\ServiceManager\ServiceLocatorInterface;
  * @version   Release: <package_version>
  * @link      https://github.com/reliv
  */
-class ViewHelperTranslateHtmlFactory implements FactoryInterface
+class ViewHelperTranslateHtmlFactory
 {
     /**
-     * createService
+     * __invoke
      *
-     * @param ServiceLocatorInterface $serviceLocator
+     * @param $container ContainerInterface|ServiceLocatorInterface|HelperPluginManager
      *
      * @return TranslateHtml
      */
-    public function createService(ServiceLocatorInterface $serviceLocator)
+    public function __invoke($container)
     {
-        $serviceLocator = $serviceLocator->getServiceLocator();
+        // @BC for ZendFramework
+        if ($container instanceof HelperPluginManager) {
+            $container = $container->getServiceLocator();
+        }
+
         return new TranslateHtml(
-            $serviceLocator->get(
+            $container->get(
                 'RcmHtmlPurifier'
             )
         );

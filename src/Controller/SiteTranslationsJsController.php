@@ -31,7 +31,7 @@ class SiteTranslationsJsController extends AbstractRestfulJsonController
     protected function getLocale()
     {
         return $this->getServiceLocator()->get(
-            'Rcm\Service\CurrentSite'
+            \Rcm\Service\CurrentSite::class
         )->getLocale();
     }
 
