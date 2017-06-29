@@ -3,7 +3,7 @@
 namespace RcmI18n\Middleware;
 
 use Psr\Http\Message\ResponseInterface;
-use Zend\Stratigility\Http\Request;
+use Psr\Http\Message\ServerRequestInterface as Request;
 
 /**
  * Class AssetController
