@@ -26,8 +26,8 @@ class RemoteLoaderDoctrineDbLoaderFactoryTest extends \PHPUnit_Framework_TestCas
         $loadPluginMgr->setServiceLocator($sm);
         $unit = new RemoteLoaderDoctrineDbLoaderFactory();
         $this->assertInstanceOf(
-            'RcmI18n\RemoteLoader\DoctrineDbLoader',
-            $unit->createService($loadPluginMgr)
+            \RcmI18n\RemoteLoader\DoctrineDbLoader::class,
+            $unit->__invoke($loadPluginMgr)
         );
     }
 }
