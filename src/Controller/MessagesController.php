@@ -3,6 +3,7 @@
 namespace RcmI18n\Controller;
 
 use RcmI18n\Entity\Message;
+use RcmUser\Service\RcmUserService;
 use Zend\Http\PhpEnvironment\Response;
 use Zend\Mvc\Controller\AbstractRestfulController;
 use Zend\View\Model\JsonModel;
@@ -22,6 +23,24 @@ use Zend\View\Model\JsonModel;
  */
 class MessagesController extends AbstractRestfulController
 {
+    /**
+     * @param      $resourceId
+     * @param null $privilege
+     *
+     * @return bool
+     */
+    protected function isAllowed(
+        $resourceId,
+        $privilege = null
+    ) {
+        /** @var RcmUserService $rcmUserService */
+        $rcmUserService = $this->serviceLocator->get(RcmUserService::class);
+
+        return $rcmUserService->isAllowed(
+            $resourceId,
+            $privilege
+        );
+    }
 
     /**
      * getList
@@ -30,7 +49,6 @@ class MessagesController extends AbstractRestfulController
      */
     public function getList()
     {
-
         $em = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
         $locale = $this->params()->fromRoute('locale');
 
@@ -69,7 +87,7 @@ class MessagesController extends AbstractRestfulController
     /**
      * Update translations
      *
-     * @param mixed $id Id of text that need to be translated
+     * @param mixed $id   Id of text that need to be translated
      * @param mixed $data Data
      *
      * @return mixed|\Zend\Stdlib\ResponseInterface|JsonModel
@@ -77,7 +95,8 @@ class MessagesController extends AbstractRestfulController
      */
     public function update($id, $data)
     {
-        if (!$this->rcmIsAllowed('translations', 'update')) {
+
+        if (!$this->isAllowed('translations', 'update')) {
             $response = $this->getResponse();
             $response->setStatusCode(Response::STATUS_CODE_401);
             $response->setContent($response->renderStatusLine());

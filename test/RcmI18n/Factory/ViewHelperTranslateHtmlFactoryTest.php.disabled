@@ -27,8 +27,8 @@ class ViewHelperTranslateHtmlFactoryTest extends \PHPUnit_Framework_TestCase
         $viewSm->setServiceLocator($sm);
         $unit = new ViewHelperTranslateHtmlFactory();
         $this->assertInstanceOf(
-            'RcmI18n\ViewHelper\TranslateHtml',
-            $unit->createService($viewSm)
+            \RcmI18n\ViewHelper\TranslateHtml::class,
+            $unit->__invoke($viewSm)
         );
     }
 }
