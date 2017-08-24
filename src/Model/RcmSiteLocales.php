@@ -23,7 +23,7 @@ class RcmSiteLocales implements Locales
      * @var Site
      */
     protected $siteRepo;
-    
+
     /**
      * @var array
      */
