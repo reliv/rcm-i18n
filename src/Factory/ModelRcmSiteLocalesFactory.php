@@ -32,7 +32,7 @@ class ModelRcmSiteLocalesFactory
     public function __invoke($container)
     {
         return new RcmSiteLocales(
-            $container->get('Doctrine\ORM\EntityManager')->getRepository('\Rcm\Entity\Site')
+            $container->get('Doctrine\ORM\EntityManager')->getRepository(\Rcm\Entity\Site::class)
         );
     }
 }

@@ -140,7 +140,7 @@ class MissingTranslationListener implements ListenerAggregateInterface
         $em = $this->getEntityManager();
 
         try {
-            $defaultMessage = $em->getRepository('RcmI18n\Entity\Message')
+            $defaultMessage = $em->getRepository(\RcmI18n\Entity\Message::class)
                 ->findOneBy(
                     [
                         'locale' => $defaultLocale,
