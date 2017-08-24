@@ -20,9 +20,14 @@ use Rcm\Repository\Site;
 class RcmSiteLocales implements Locales
 {
     /**
+     * @var Site
+     */
+    protected $siteRepo;
+    
+    /**
      * @var array
      */
-    protected $locales;
+    protected $locales = null;
 
     /**
      * Constructor
@@ -31,16 +36,25 @@ class RcmSiteLocales implements Locales
      */
     public function __construct(Site $siteRepo)
     {
+        $this->siteRepo = $siteRepo;
+    }
+
+    /**
+     * @return array
+     */
+    protected function buildLocales()
+    {
         $list = [];
 
         /** @var \Rcm\Entity\Site $site */
-        foreach ($siteRepo->getSites(true) as $site) {
+        foreach ($this->siteRepo->getSites(true) as $site) {
             $list[$site->getLanguage()->getIso6391()
-            . '_' . $site->getCountry()->getIso2()] = $site->getCountry()->getCountryName()
-            . ' - ' . $site->getLanguage()->getLanguageName();
+            . '_' . $site->getCountry()->getIso2()]
+                = $site->getCountry()->getCountryName()
+                . ' - ' . $site->getLanguage()->getLanguageName();
         }
 
-        $this->locales = array_unique($list);
+        return array_unique($list);
     }
 
     /**
@@ -50,6 +64,10 @@ class RcmSiteLocales implements Locales
      */
     public function getLocales()
     {
+        if ($this->locales === null) {
+            $this->locales = $this->buildLocales();
+        }
+
         return $this->locales;
     }
 
