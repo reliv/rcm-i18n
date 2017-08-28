@@ -24,6 +24,7 @@ angular.module('rcmI18nAdmin').controller(
             rcmLoading
         ) {
             var self = this;
+            var loadingKey = 'i18n';
             self.url = {
                 locales: '/rcmi18n/locales'
             };
@@ -94,6 +95,7 @@ angular.module('rcmI18nAdmin').controller(
 
             $scope.OpenLocale = function () {
                 $scope.loading = true;//loadin ng-show set to true when ng change OpenLocale() is called
+                rcmLoading.setLoading(loadingKey, 0);
                 var locale = $scope.selectedLocale;
                 if (locale) {
                     $scope.loading = true;
@@ -118,11 +120,13 @@ angular.module('rcmI18nAdmin').controller(
                                 }
                             );
                             $scope.loading = false;
+                            rcmLoading.setLoading(loadingKey, 1);
                         }
                     ).error(
                         function () {
                             alert('Couldn\'t load messages!');
                             $scope.loading = false;
+                            rcmLoading.setLoading(loadingKey, 1);
                             // called asynchronously if an error occurs
                             // or server returns response with an error status.
                         }
@@ -130,8 +134,6 @@ angular.module('rcmI18nAdmin').controller(
 
                 }
             };
-
-            var loadingKey = 'i18n';
 
             $scope.saveText = function (message) {
                 rcmLoading.setLoading(loadingKey, 0);
@@ -151,10 +153,14 @@ angular.module('rcmI18nAdmin').controller(
                         rcmLoading.setLoading(loadingKey, 1);
                     }
                 ).error(
-                    function () {
+                    function (data, status) {
                         alert('Couldn\'t save!');
+                        rcmLoading.setLoading(loadingKey, 1);
                         // called asynchronously if an error occurs
                         // or server returns response with an error status.
+                        if (status == 401) {
+                            window.location = '/';
+                        }
                     }
                 );
             }
