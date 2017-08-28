@@ -2,7 +2,7 @@
 
 namespace RcmI18n\Factory;
 
-use Interop\Container\ContainerInterface;
+use Psr\Container\ContainerInterface;
 use RcmI18n\Controller\Plugin\ParamTranslate;
 use Zend\Mvc\Controller\PluginManager;
 use Zend\ServiceManager\ServiceLocatorInterface;

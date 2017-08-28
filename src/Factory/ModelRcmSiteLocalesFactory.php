@@ -2,7 +2,7 @@
 
 namespace RcmI18n\Factory;
 
-use Interop\Container\ContainerInterface;
+use Psr\Container\ContainerInterface;
 use Rcm\Api\Repository\Site\FindActiveSites;
 use RcmI18n\Model\Locales;
 use RcmI18n\Model\RcmSiteLocales;

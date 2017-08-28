@@ -2,16 +2,12 @@
 
 namespace RcmI18n\Factory;
 
-use Interop\Container\ContainerInterface;
+use Psr\Container\ContainerInterface;
 use Zend\I18n\Translator\Translator;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
 /**
  * MvcTranslatorFactory
- *
- * LongDescHere
- *
- * PHP version 5
  *
  * @category  Reliv
  * @package   src\RcmI18n

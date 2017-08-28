@@ -2,7 +2,7 @@
 
 namespace RcmI18n\Factory;
 
-use Interop\Container\ContainerInterface;
+use Psr\Container\ContainerInterface;
 use RcmI18n\RemoteLoader\DoctrineDbLoader;
 use Zend\I18n\Translator\LoaderPluginManager;
 use Zend\ServiceManager\ServiceLocatorInterface;

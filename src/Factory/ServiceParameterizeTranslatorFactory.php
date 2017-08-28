@@ -2,7 +2,7 @@
 
 namespace RcmI18n\Factory;
 
-use Interop\Container\ContainerInterface;
+use Psr\Container\ContainerInterface;
 use RcmI18n\Service\ParameterizeTranslator;
 
 class ServiceParameterizeTranslatorFactory
