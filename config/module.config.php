@@ -27,15 +27,17 @@ return [
      */
     'controllers' => [
         'invokables' => [
-            'RcmI18n\Controller\Locale' =>
-                'RcmI18n\Controller\LocaleController',
-            'RcmI18n\Controller\Messages' =>
-                'RcmI18n\Controller\MessagesController',
-            'RcmI18n\Controller\SiteTranslationsJs' =>
-                'RcmI18n\Controller\SiteTranslationsJsController',
-            'RcmI18n\Controller\ApiTranslateController' =>
-                'RcmI18n\Controller\ApiTranslateController',
+            'RcmI18n\Controller\Locale'
+            => \RcmI18n\Controller\LocaleController::class,
 
+            'RcmI18n\Controller\Messages'
+            => \RcmI18n\Controller\MessagesController::class,
+
+            'RcmI18n\Controller\SiteTranslationsJs'
+            => \RcmI18n\Controller\SiteTranslationsJsController::class,
+
+            'RcmI18n\Controller\ApiTranslateController'
+            => \RcmI18n\Controller\ApiTranslateController::class,
         ]
     ],
     /**
@@ -43,7 +45,8 @@ return [
      */
     'controller_plugins' => [
         'factories' => [
-            'paramTranslate' => 'RcmI18n\Factory\ControllerPluginParamTranslatorFactory',
+            'paramTranslate'
+            => \RcmI18n\Factory\ControllerPluginParamTranslatorFactory::class,
         ],
     ],
     /**
@@ -127,8 +130,11 @@ return [
      */
     'view_helpers' => [
         'factories' => [
-            'translate' => 'RcmI18n\Factory\ViewHelperTranslateHtmlFactory',
-            'paramTranslate' => 'RcmI18n\Factory\ViewHelperParamTranslatorFactory',
+            'translate'
+            => \RcmI18n\Factory\ViewHelperTranslateHtmlFactory::class,
+
+            'paramTranslate'
+            => \RcmI18n\Factory\ViewHelperParamTranslatorFactory::class,
         ]
     ],
     /**

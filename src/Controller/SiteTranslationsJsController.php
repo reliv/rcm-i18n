@@ -3,15 +3,10 @@
 
 namespace RcmI18n\Controller;
 
-use Doctrine\ORM\Query;
 use Rcm\Controller\AbstractRestfulJsonController;
 
 /**
  * Class SiteTranslationsJsController
- *
- * LongDescHere
- *
- * PHP version 5
  *
  * @category  Reliv
  * @package   RcmI18n\Controller

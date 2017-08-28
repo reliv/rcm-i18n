@@ -2,16 +2,18 @@
 
 namespace RcmI18n\Controller;
 
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityRepository;
+use RcmHtmlPurifier\Api\Purify;
+use RcmI18n\Api\Acl\IsAllowed;
 use RcmI18n\Entity\Message;
-use RcmUser\Service\RcmUserService;
+use Zend\Diactoros\ServerRequestFactory;
 use Zend\Http\PhpEnvironment\Response;
 use Zend\Mvc\Controller\AbstractRestfulController;
 use Zend\View\Model\JsonModel;
 
 /**
  * MessagesController
- *
- * PHP version 5
  *
  * @category  Reliv
  * @package   RcmI18n\Controller
@@ -24,21 +26,33 @@ use Zend\View\Model\JsonModel;
 class MessagesController extends AbstractRestfulController
 {
     /**
-     * @param      $resourceId
-     * @param null $privilege
+     * @param array $options
      *
      * @return bool
      */
-    protected function isAllowed(
-        $resourceId,
-        $privilege = null
-    ) {
-        /** @var RcmUserService $rcmUserService */
-        $rcmUserService = $this->serviceLocator->get(RcmUserService::class);
+    protected function isAllowed(array $options = [])
+    {
+        /** @var IsAllowed $isAllowed */
+        $isAllowed = $this->serviceLocator->get(IsAllowed::class);
 
-        return $rcmUserService->isAllowed(
-            $resourceId,
-            $privilege
+        return $isAllowed->__invoke(
+            ServerRequestFactory::fromGlobals(),
+            $options
+        );
+    }
+
+    /**
+     * @param $html
+     *
+     * @return string
+     */
+    protected function purify($html)
+    {
+        /** @var Purify $purify */
+        $purify = $this->serviceLocator->get(Purify::class);
+
+        return $purify->__invoke(
+            $html
         );
     }
 
@@ -49,13 +63,15 @@ class MessagesController extends AbstractRestfulController
      */
     public function getList()
     {
+        /** @var EntityManager $em */
         $em = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
+        /** @var EntityRepository $messageRepo */
+        $messageRepo = $em->getRepository(\RcmI18n\Entity\Message::class);
+
         $locale = $this->params()->fromRoute('locale');
 
-        $defaultMessages = $em->getRepository(\RcmI18n\Entity\Message::class)
-            ->findBy(['locale' => 'en_US']);
-        $localeMessages = $em->getRepository(\RcmI18n\Entity\Message::class)
-            ->findBy(['locale' => $locale]);
+        $defaultMessages = $messageRepo->findBy(['locale' => 'en_US']);
+        $localeMessages = $messageRepo->findBy(['locale' => $locale]);
 
         $translations = [];
         foreach ($defaultMessages as $defaultMessage) {
@@ -65,6 +81,7 @@ class MessagesController extends AbstractRestfulController
             $text = null;
             $messageId = null;
 
+            /** @var Message $localeMessage */
             foreach ($localeMessages as $localeMessage) {
                 if ($localeMessage->getDefaultText() == $defaultText) {
                     $text = $localeMessage->getText();
@@ -96,7 +113,7 @@ class MessagesController extends AbstractRestfulController
     public function update($id, $data)
     {
 
-        if (!$this->isAllowed('translations', 'update')) {
+        if (!$this->isAllowed(['privilege' => 'update'])) {
             $response = $this->getResponse();
             $response->setStatusCode(Response::STATUS_CODE_401);
             $response->setContent($response->renderStatusLine());
@@ -104,7 +121,9 @@ class MessagesController extends AbstractRestfulController
             return $response;
         }
 
+        /** @var EntityManager $em */
         $em = $this->getServiceLocator()->get('Doctrine\ORM\EntityManager');
+        /** @var EntityRepository $messageRepo */
         $messageRepo = $em->getRepository(\RcmI18n\Entity\Message::class);
 
         $locale = $this->params()->fromRoute('locale');
@@ -128,7 +147,7 @@ class MessagesController extends AbstractRestfulController
         /**
          * Purify text to make sure nothing funny is making its way to the DB
          */
-        $cleanText = $this->rcmHtmlPurify($data['text']);
+        $cleanText = $this->purify($data['text']);
 
         $message = $messageRepo->findOneBy(
             ['locale' => $locale, 'messageId' => $id]
@@ -149,6 +168,11 @@ class MessagesController extends AbstractRestfulController
         return new JsonModel($message);
     }
 
+    /**
+     * @param $message
+     *
+     * @return \Zend\Stdlib\ResponseInterface
+     */
     public function buildBadRequestResponse($message)
     {
         $response = $this->getResponse();

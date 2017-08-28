@@ -11,10 +11,6 @@ use Zend\View\Model\JsonModel;
 /**
  * Class ApiController
  *
- * LongDescHere
- *
- * PHP version 5
- *
  * @category  Reliv
  * @package   moduleNameHere
  * @author    James Jervis <jjervis@relivinc.com>

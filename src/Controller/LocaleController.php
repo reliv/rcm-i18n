@@ -1,19 +1,4 @@
 <?php
-/**
- * LocaleController.php
- *
- * Restful Controller for creating admin screens for translations
- *
- * PHP version 5
- *
- * @category  Reliv
- * @package   RcmI18n\Entity\Controller
- * @author    Inna Davis <idavis@relivinc.com>
- * @copyright 2014 Reliv International
- * @license   License.txt New BSD License
- * @version   GIT: <git_id>
- * @link      https://github.com/reliv
- */
 
 namespace RcmI18n\Controller;
 
@@ -29,7 +14,6 @@ class LocaleController extends AbstractRestfulController
      */
     public function getList()
     {
-
         return new JsonModel(
             [
                 'locales' =>
