@@ -2,27 +2,22 @@
 
 namespace RcmI18n\Model;
 
-use Rcm\Repository\Site;
+use Rcm\Api\Repository\Site\FindActiveSites;
 
 /**
- * Locales
+ * RcmSiteLocales
  *
- * PHP version 5
- *
- * @category  Reliv
- * @package   RcmI18n\Model
  * @author    Rod Mcnew <rmcnew@relivinc.com>
  * @copyright 2014 Reliv International
  * @license   License.txt New BSD License
- * @version   Release: <package_version>
  * @link      https://github.com/reliv
  */
 class RcmSiteLocales implements Locales
 {
     /**
-     * @var Site
+     * @var FindActiveSites
      */
-    protected $siteRepo;
+    protected $findActiveSites;
 
     /**
      * @var array
@@ -30,13 +25,11 @@ class RcmSiteLocales implements Locales
     protected $locales = null;
 
     /**
-     * Constructor
-     *
-     * @param Site $siteRepo Rcm Site Repo
+     * @param FindActiveSites $findActiveSites
      */
-    public function __construct(Site $siteRepo)
+    public function __construct(FindActiveSites $findActiveSites)
     {
-        $this->siteRepo = $siteRepo;
+        $this->findActiveSites = $findActiveSites;
     }
 
     /**
@@ -46,12 +39,13 @@ class RcmSiteLocales implements Locales
     {
         $list = [];
 
+        $sites = $this->findActiveSites->__invoke();
+
         /** @var \Rcm\Entity\Site $site */
-        foreach ($this->siteRepo->getSites(true) as $site) {
-            $list[$site->getLanguage()->getIso6391()
-            . '_' . $site->getCountry()->getIso2()]
-                = $site->getCountry()->getCountryName()
-                . ' - ' . $site->getLanguage()->getLanguageName();
+        foreach ($sites as $site) {
+            $countryName = $site->getCountry()->getCountryName();
+            $languageName = $site->getLanguage()->getLanguageName();
+            $list[$site->getLocale()] = $countryName . ' - ' . $languageName;
         }
 
         return array_unique($list);
