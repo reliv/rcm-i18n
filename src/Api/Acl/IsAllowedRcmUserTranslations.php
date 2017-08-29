@@ -6,6 +6,7 @@ use Psr\Http\Message\ServerRequestInterface;
 use RcmUser\Service\RcmUserService;
 
 /**
+ * 
  * @author James Jervis - https://github.com/jerv13
  */
 class IsAllowedRcmUserTranslations implements IsAllowed
