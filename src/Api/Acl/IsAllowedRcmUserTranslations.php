@@ -33,8 +33,7 @@ class IsAllowedRcmUserTranslations implements IsAllowed
     public function __invoke(
         ServerRequestInterface $request,
         array $options = []
-    ): bool
-    {
+    ): bool {
         $privilege = (array_key_exists('privilege', $options) ? $options['privilege'] : 'read');
 
         return $this->rcmUserService->isAllowed(
