@@ -68,8 +68,7 @@ class SiteTranslationsJsController
         );
         $translationJson = json_encode($siteTranslations);
 
-        $content
-            = 'var rcmI18nTranslations = {' .
+        $content = 'var rcmI18nTranslations = {' .
             " defaultLocale: '{$locale}'," .
             " translations: {'{$locale}': $translationJson}," .
             ' get: function (defaultText, locale) {' .
