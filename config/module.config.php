@@ -27,25 +27,23 @@ return [
      */
     'controllers' => [
         'invokables' => [
-            'RcmI18n\Controller\Locale' =>
-                'RcmI18n\Controller\LocaleController',
-            'RcmI18n\Controller\Messages' =>
-                'RcmI18n\Controller\MessagesController',
-            'RcmI18n\Controller\SiteTranslationsJs' =>
-                'RcmI18n\Controller\SiteTranslationsJsController',
-            'RcmI18n\Controller\ApiTranslateController' =>
-                'RcmI18n\Controller\ApiTranslateController',
+            'RcmI18n\Controller\Locale'
+            => \RcmI18n\Controller\LocaleController::class,
 
+            'RcmI18n\Controller\Messages'
+            => \RcmI18n\Controller\MessagesController::class,
+
+            'RcmI18n\Controller\SiteTranslationsJs'
+            => \RcmI18n\Controller\SiteTranslationsJsController::class,
+
+            'RcmI18n\Controller\ApiTranslateController'
+            => \RcmI18n\Controller\ApiTranslateController::class,
         ]
     ],
     /**
      * controller_plugins
      */
-    'controller_plugins' => [
-        'factories' => [
-            'paramTranslate' => 'RcmI18n\Factory\ControllerPluginParamTranslatorFactory',
-        ],
-    ],
+    'controller_plugins' => require(__DIR__ . '/controller_plugins.php'),
     /**
      * doctrine
      */
@@ -125,12 +123,7 @@ return [
     /**
      * view_helpers
      */
-    'view_helpers' => [
-        'factories' => [
-            'translate' => 'RcmI18n\Factory\ViewHelperTranslateHtmlFactory',
-            'paramTranslate' => 'RcmI18n\Factory\ViewHelperParamTranslatorFactory',
-        ]
-    ],
+    'view_helpers' => require(__DIR__ . '/view_helpers.php'),
     /**
      * view_manager
      */

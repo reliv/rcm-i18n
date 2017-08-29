@@ -1,25 +1,24 @@
 <?php
 
-namespace RcmI18n\Factory;
+namespace RcmI18n\Controller\Plugin;
 
-use Interop\Container\ContainerInterface;
-use RcmI18n\ViewHelper\ParamTranslate;
+use Psr\Container\ContainerInterface;
+use Zend\Mvc\Controller\PluginManager;
 use Zend\ServiceManager\ServiceLocatorInterface;
-use Zend\View\HelperPluginManager;
 
-class ViewHelperParamTranslatorFactory
+class ParamTranslatorFactory
 {
     /**
      * __invoke
      *
-     * @param $container ContainerInterface|ServiceLocatorInterface|HelperPluginManager
+     * @param $container ContainerInterface|ServiceLocatorInterface|PluginManager
      *
      * @return ParamTranslate
      */
     public function __invoke($container)
     {
         // @BC for ZendFramework
-        if ($container instanceof HelperPluginManager) {
+        if ($container instanceof PluginManager) {
             $container = $container->getServiceLocator();
         }
 

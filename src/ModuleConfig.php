@@ -45,21 +45,13 @@ class ModuleConfig
              */
             'RcmUser' => require(__DIR__ . '/../config/rcm-user.php'),
             /**
-             * routes
+             * Expressive routes
              */
             'routes' => require(__DIR__ . '/../config/routes.php'),
             /**
              * navigation
              */
             'navigation' => require(__DIR__ . '/../config/navigation.php'),
-            /**
-             * translator
-             */
-            'translator' => require(__DIR__ . '/../config/translator.php'),
-            /**
-             * translator_plugins
-             */
-            'translator_plugins' => require(__DIR__ . '/../config/translator_plugins.php'),
         ];
     }
 }

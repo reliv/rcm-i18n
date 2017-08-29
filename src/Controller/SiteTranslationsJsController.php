@@ -3,15 +3,11 @@
 
 namespace RcmI18n\Controller;
 
-use Doctrine\ORM\Query;
 use Rcm\Controller\AbstractRestfulJsonController;
+use RcmI18n\Entity\Message;
 
 /**
  * Class SiteTranslationsJsController
- *
- * LongDescHere
- *
- * PHP version 5
  *
  * @category  Reliv
  * @package   RcmI18n\Controller
@@ -50,7 +46,7 @@ class SiteTranslationsJsController extends AbstractRestfulJsonController
             ->select(
                 'message.text,message.defaultText'
             )
-            ->from('RcmI18n\Entity\Message', 'message')
+            ->from(Message::class, 'message')
             ->where('message.locale = :locale')
             ->setParameter('locale', $locale);
 

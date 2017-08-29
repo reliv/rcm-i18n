@@ -19,13 +19,10 @@ namespace RcmI18nTest\Controller;
 
 require __DIR__ . '/../../autoload.php';
 
-use Rcm\Acl\ResourceName;
-use Rcm\Acl\ResourceNameRcm;
-use
-    RcmI18n\Controller\MessagesController;
+use RcmI18n\Api\Acl\IsAllowed;
+use RcmI18n\Controller\MessagesController;
 use RcmUser\Service\RcmUserService;
-use
-    Zend\Http\Response;
+use Zend\Http\Response;
 use Zend\ServiceManager\ServiceManager;
 
 class MessagesControllerTest extends \PHPUnit_Framework_TestCase
@@ -33,17 +30,17 @@ class MessagesControllerTest extends \PHPUnit_Framework_TestCase
 
     public function testUpdate()
     {
-        $userSvc = $this
-            ->getMockBuilder(RcmUserService::class)
+        $isAllowed = $this
+            ->getMockBuilder(IsAllowed::class)
             ->disableOriginalConstructor()
             ->getMock();
 
-        $userSvc->expects($this->any())
-            ->method('isAllowed')
+        $isAllowed->expects($this->any())
+            ->method('__invoke')
             ->will($this->returnValue(false));
 
         $serviceMgr = new ServiceManager();
-        $serviceMgr->setService(RcmUserService::class, $userSvc);
+        $serviceMgr->setService(IsAllowed::class, $isAllowed);
 
         $messagesController = new MessagesControllerWrapper();
         $messagesController->setServiceLocator($serviceMgr);
@@ -64,7 +61,6 @@ class MessagesControllerTest extends \PHPUnit_Framework_TestCase
             Response::STATUS_CODE_401
         );
 
-
     }
 }
 
@@ -75,7 +71,6 @@ class MessagesControllerWrapper extends MessagesController
 
     public function rcmIsAllowed()
     {
-
         return $this->testRcmIsAllowedResult;
     }
 }

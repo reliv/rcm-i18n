@@ -8,8 +8,6 @@ use Zend\Mvc\Controller\Plugin\AbstractPlugin;
 /**
  * Class ParamTranslate
  *
- * PHP version 5
- *
  * @category  Reliv
  * @package   RcmI18n\ViewHelper
  * @author    James Jervis <jjervis@relivinc.com>

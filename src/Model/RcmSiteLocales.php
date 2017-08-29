@@ -2,45 +2,53 @@
 
 namespace RcmI18n\Model;
 
-use Rcm\Repository\Site;
+use Rcm\Api\Repository\Site\FindActiveSites;
 
 /**
- * Locales
+ * RcmSiteLocales
  *
- * PHP version 5
- *
- * @category  Reliv
- * @package   RcmI18n\Model
  * @author    Rod Mcnew <rmcnew@relivinc.com>
  * @copyright 2014 Reliv International
  * @license   License.txt New BSD License
- * @version   Release: <package_version>
  * @link      https://github.com/reliv
  */
 class RcmSiteLocales implements Locales
 {
     /**
-     * @var array
+     * @var FindActiveSites
      */
-    protected $locales;
+    protected $findActiveSites;
 
     /**
-     * Constructor
-     *
-     * @param Site $siteRepo Rcm Site Repo
+     * @var array
      */
-    public function __construct(Site $siteRepo)
+    protected $locales = null;
+
+    /**
+     * @param FindActiveSites $findActiveSites
+     */
+    public function __construct(FindActiveSites $findActiveSites)
+    {
+        $this->findActiveSites = $findActiveSites;
+    }
+
+    /**
+     * @return array
+     */
+    protected function buildLocales()
     {
         $list = [];
 
+        $sites = $this->findActiveSites->__invoke();
+
         /** @var \Rcm\Entity\Site $site */
-        foreach ($siteRepo->getSites(true) as $site) {
-            $list[$site->getLanguage()->getIso6391()
-            . '_' . $site->getCountry()->getIso2()] = $site->getCountry()->getCountryName()
-            . ' - ' . $site->getLanguage()->getLanguageName();
+        foreach ($sites as $site) {
+            $countryName = $site->getCountry()->getCountryName();
+            $languageName = $site->getLanguage()->getLanguageName();
+            $list[$site->getLocale()] = $countryName . ' - ' . $languageName;
         }
 
-        $this->locales = array_unique($list);
+        return array_unique($list);
     }
 
     /**
@@ -50,6 +58,10 @@ class RcmSiteLocales implements Locales
      */
     public function getLocales()
     {
+        if ($this->locales === null) {
+            $this->locales = $this->buildLocales();
+        }
+
         return $this->locales;
     }
 

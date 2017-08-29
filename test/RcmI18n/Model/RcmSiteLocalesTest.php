@@ -2,6 +2,7 @@
 
 namespace RcmI18nTest\Model;
 
+use Rcm\Api\Repository\Site\FindActiveSites;
 use Rcm\Entity\Country;
 use Rcm\Entity\Language;
 use Rcm\Entity\Site;
@@ -39,12 +40,14 @@ class RcmSiteLocalesTest extends \PHPUnit_Framework_TestCase
         $site = new Site('user123');
         $site->setCountry($country);
         $site->setLanguage($lang);
-        $mockSiteRepo = $this->getMockBuilder('\Rcm\Repository\Site')
+        $findActiveSites= $this->getMockBuilder(FindActiveSites::class)
             ->disableOriginalConstructor()->getMock();
-        $mockSiteRepo->expects($this->any())
-            ->method('getSites')
+        $findActiveSites->expects($this->any())
+            ->method('__invoke')
             ->will($this->returnValue([$site]));
-        $this->unit = new RcmSiteLocales($mockSiteRepo);
+
+
+        $this->unit = new RcmSiteLocales($findActiveSites);
     }
 
     public function testConstructAndGetLocales()

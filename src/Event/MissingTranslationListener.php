@@ -8,7 +8,6 @@ use Zend\EventManager\EventInterface;
 use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\ListenerAggregateInterface;
 use Zend\I18n\Translator\Translator;
-use Zend\ServiceManager\ServiceLocatorInterface;
 
 /**
  * Class AddMissingTranslationListener
@@ -140,7 +139,7 @@ class MissingTranslationListener implements ListenerAggregateInterface
         $em = $this->getEntityManager();
 
         try {
-            $defaultMessage = $em->getRepository('RcmI18n\Entity\Message')
+            $defaultMessage = $em->getRepository(\RcmI18n\Entity\Message::class)
                 ->findOneBy(
                     [
                         'locale' => $defaultLocale,

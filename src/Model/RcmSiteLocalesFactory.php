@@ -1,26 +1,19 @@
 <?php
 
-namespace RcmI18n\Factory;
+namespace RcmI18n\Model;
 
-use Interop\Container\ContainerInterface;
-use RcmI18n\Model\Locales;
-use RcmI18n\Model\RcmSiteLocales;
+use Psr\Container\ContainerInterface;
+use Rcm\Api\Repository\Site\FindActiveSites;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
 /**
- * ModelRcmSiteLocalesFactory
  *
- * PHP version 5
- *
- * @category  Reliv
- * @package   src\RcmI18n
  * @author    Rod Mcnew <rmcnew@relivinc.com>
  * @copyright 2014 Reliv International
  * @license   License.txt New BSD License
- * @version   Release: <package_version>
  * @link      https://github.com/reliv
  */
-class ModelRcmSiteLocalesFactory
+class RcmSiteLocalesFactory
 {
     /**
      * __invoke
@@ -32,7 +25,7 @@ class ModelRcmSiteLocalesFactory
     public function __invoke($container)
     {
         return new RcmSiteLocales(
-            $container->get('Doctrine\ORM\EntityManager')->getRepository('\Rcm\Entity\Site')
+            $container->get(FindActiveSites::class)
         );
     }
 }

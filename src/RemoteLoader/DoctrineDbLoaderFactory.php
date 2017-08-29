@@ -1,17 +1,12 @@
 <?php
 
-namespace RcmI18n\Factory;
+namespace RcmI18n\RemoteLoader;
 
-use Interop\Container\ContainerInterface;
-use RcmI18n\RemoteLoader\DoctrineDbLoader;
+use Psr\Container\ContainerInterface;
 use Zend\I18n\Translator\LoaderPluginManager;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
 /**
- * RemoteLoaderDoctrineDbLoaderFactory
- *
- * PHP version 5
- *
  * @category  Reliv
  * @package   src\RcmI18n
  * @author    Rod Mcnew <rmcnew@relivinc.com>
@@ -20,7 +15,7 @@ use Zend\ServiceManager\ServiceLocatorInterface;
  * @version   Release: <package_version>
  * @link      https://github.com/reliv
  */
-class RemoteLoaderDoctrineDbLoaderFactory
+class DoctrineDbLoaderFactory
 {
     /**
      * __invoke
@@ -31,6 +26,7 @@ class RemoteLoaderDoctrineDbLoaderFactory
      */
     public function __invoke($container)
     {
+        ddd(get_class($container));
         // @BC for ZendFramework
         if ($container instanceof LoaderPluginManager) {
             $container = $container->getServiceLocator();
