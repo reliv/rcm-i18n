@@ -3,14 +3,14 @@
 namespace RcmI18n;
 
 /**
- * Class ModuleConfig
+ * Class ModuleConfigBc
  *
  * @author    James Jervis <jjervis@relivinc.com>
  * @copyright 2016 Reliv International
  * @license   License.txt
  * @link      https://github.com/reliv
  */
-class ModuleConfig
+class ModuleConfigBc
 {
     /**
      * __invoke
