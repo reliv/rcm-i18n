@@ -4,6 +4,7 @@ namespace RcmI18nTest\Entity;
 
 require_once __DIR__ . '/../../autoload.php';
 
+use RcmHtmlPurifier\Api\Purify;
 use RcmI18n\ViewHelper\TranslateHtml;
 
 class TranslateHtmlTest extends \PHPUnit_Framework_TestCase
@@ -24,12 +25,12 @@ class TranslateHtmlTest extends \PHPUnit_Framework_TestCase
                 )
             );
 
-        $purifier = $this->getMockBuilder('\HTMLPurifier')
+        $purifier = $this->getMockBuilder(Purify::class)
             ->disableOriginalConstructor()
-            ->setMethods(['purify'])
+            ->setMethods(['__invoke'])
             ->getMock();
         $purifier->expects($this->once())
-            ->method('purify')
+            ->method('__invoke')
             ->will($this->returnValue('Translateidora!<br>ya!'));
 
         $unit = new TranslateHtml($purifier);

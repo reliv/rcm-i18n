@@ -3,6 +3,7 @@
 namespace RcmI18n\ViewHelper;
 
 use Psr\Container\ContainerInterface;
+use RcmHtmlPurifier\Api\Purify;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\View\HelperPluginManager;
 
@@ -35,7 +36,7 @@ class TranslateHtmlFactory
 
         return new TranslateHtml(
             $container->get(
-                'RcmHtmlPurifier'
+                Purify::class
             )
         );
     }

@@ -28,7 +28,7 @@ class MvcTranslatorFactory
      */
     public function __invoke($container)
     {
-        $config = $container->get('config');
+        $config = $container->get('Config');
         $translator = Translator::factory($config['translator']);
 
         /**

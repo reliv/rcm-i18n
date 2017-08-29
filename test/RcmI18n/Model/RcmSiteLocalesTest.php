@@ -40,12 +40,12 @@ class RcmSiteLocalesTest extends \PHPUnit_Framework_TestCase
         $site = new Site('user123');
         $site->setCountry($country);
         $site->setLanguage($lang);
-        $findActiveSites= $this->getMockBuilder(FindActiveSites::class)
+        $findActiveSites = $this->getMockBuilder(FindActiveSites::class)
+            ->setMethods(['__invoke'])
             ->disableOriginalConstructor()->getMock();
         $findActiveSites->expects($this->any())
             ->method('__invoke')
             ->will($this->returnValue([$site]));
-
 
         $this->unit = new RcmSiteLocales($findActiveSites);
     }
