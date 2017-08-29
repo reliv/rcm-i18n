@@ -10,7 +10,7 @@ return [
         'options' => [],
         'allowed_methods' => ['GET'],
     ],
-    
+
     'rcmi18n.locales' => [
         'name' => 'rcmi18n.locales',
         'path' => '/rcmi18n/locales',

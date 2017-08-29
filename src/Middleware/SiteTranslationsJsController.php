@@ -5,7 +5,7 @@ namespace RcmI18n\Middleware;
 use Doctrine\ORM\EntityManager;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Rcm\Service\CurrentSite;
+use Rcm\Service\SiteService;
 use RcmI18n\Entity\Message;
 use Zend\Diactoros\Response;
 
@@ -20,20 +20,20 @@ class SiteTranslationsJsController
     protected $entityManager;
 
     /**
-     * @var CurrentSite
+     * @var SiteService
      */
-    protected $currentSite;
+    protected $siteService;
 
     /**
      * @param EntityManager $entityManager
-     * @param CurrentSite   $currentSite
+     * @param SiteService   $siteService
      */
     public function __construct(
         EntityManager $entityManager,
-        CurrentSite $currentSite
+        SiteService $siteService
     ) {
         $this->entityManager = $entityManager;
-        $this->currentSite = $currentSite;
+        $this->siteService = $siteService;
     }
 
     /**
@@ -60,8 +60,12 @@ class SiteTranslationsJsController
             ]
         );
 
-        $locale = $this->getLocale();
-        $siteTranslations = $this->getSiteTranslations();
+        $locale = $this->getLocale(
+            $request
+        );
+        $siteTranslations = $this->getSiteTranslations(
+            $locale
+        );
         $translationJson = json_encode($siteTranslations);
 
         $content
@@ -85,24 +89,28 @@ class SiteTranslationsJsController
     }
 
     /**
-     * getLocale
+     * @param ServerRequestInterface $request
      *
-     * @return mixed
+     * @return string
      */
-    protected function getLocale()
-    {
-        return $this->currentSite->getLocale();
+    protected function getLocale(
+        ServerRequestInterface $request
+    ) {
+        $site = $this->siteService->getSite(
+            $request->getUri()->getHost()
+        );
+
+        return $site->getLocale();
     }
 
     /**
-     * getSiteTranslations
+     * @param string $locale
      *
-     * @return mixed
+     * @return array
      */
-    protected function getSiteTranslations()
-    {
-        $locale = $this->getLocale();
-
+    protected function getSiteTranslations(
+        string $locale
+    ) {
         $query = $this->entityManager->createQueryBuilder()
             ->select(
                 'message.text,message.defaultText'

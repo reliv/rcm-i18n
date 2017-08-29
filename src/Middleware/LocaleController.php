@@ -4,7 +4,7 @@ namespace RcmI18n\Middleware;
 
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Rcm\Service\CurrentSite;
+use Rcm\Service\SiteService;
 use RcmI18n\Model\Locales;
 use Zend\Diactoros\Response\JsonResponse;
 
@@ -19,20 +19,20 @@ class LocaleController
     protected $locales;
 
     /**
-     * @var CurrentSite
+     * @var SiteService
      */
-    protected $currentSite;
+    protected $siteService;
 
     /**
      * @param Locales     $locales
-     * @param CurrentSite $currentSite
+     * @param SiteService $siteService
      */
     public function __construct(
         Locales $locales,
-        CurrentSite $currentSite
+        SiteService $siteService
     ) {
         $this->locales = $locales;
-        $this->currentSite = $currentSite;
+        $this->siteService = $siteService;
     }
 
     /**
@@ -49,10 +49,14 @@ class LocaleController
         ResponseInterface $response,
         callable $next = null
     ) {
+        $site = $this->siteService->getCurrentSite(
+            $request->getUri()->getHost()
+        );
+
         return new JsonResponse(
             [
                 'locales' => $this->locales->getLocales(),
-                'currentSiteLocale' => $this->currentSite->getLocale()
+                'currentSiteLocale' => $site->getLocale()
             ]
         );
     }

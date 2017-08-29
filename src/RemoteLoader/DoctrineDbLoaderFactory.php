@@ -7,10 +7,6 @@ use Zend\I18n\Translator\LoaderPluginManager;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
 /**
- * RemoteLoaderDoctrineDbLoaderFactory
- *
- * PHP version 5
- *
  * @category  Reliv
  * @package   src\RcmI18n
  * @author    Rod Mcnew <rmcnew@relivinc.com>

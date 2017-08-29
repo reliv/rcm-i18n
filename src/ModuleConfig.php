@@ -29,6 +29,11 @@ class ModuleConfig
              */
             'dependencies' => require(__DIR__ . '/../config/dependencies.php'),
             /**
+             * @bc ONLY
+             * controller_plugins
+             */
+            'controller_plugins' => require(__DIR__ . '/../config/controller_plugins.php'),
+            /**
              * doctrine
              */
             'doctrine' => require(__DIR__ . '/../config/doctrine.php'),
@@ -53,13 +58,20 @@ class ModuleConfig
              */
             'navigation' => require(__DIR__ . '/../config/navigation.php'),
             /**
+             * @bc ONLY
              * translator
              */
             'translator' => require(__DIR__ . '/../config/translator.php'),
             /**
+             * @bc ONLY
              * translator_plugins
              */
             'translator_plugins' => require(__DIR__ . '/../config/translator_plugins.php'),
+            /**
+             * @bc ONLY
+             * view_helpers
+             */
+            'view_helpers' => require(__DIR__ . '/../config/view_helpers.php'),
         ];
     }
 }

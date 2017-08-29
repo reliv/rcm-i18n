@@ -3,7 +3,7 @@
 namespace RcmI18n\Middleware;
 
 use Psr\Container\ContainerInterface;
-use Rcm\Service\CurrentSite;
+use Rcm\Service\SiteService;
 use RcmI18n\Model\Locales;
 
 /**
@@ -22,7 +22,7 @@ class LocaleControllerFactory
     {
         return new LocaleController(
             $serviceContainer->get(Locales::class),
-            $serviceContainer->get(CurrentSite::class)
+            $serviceContainer->get(SiteService::class)
         );
     }
 }

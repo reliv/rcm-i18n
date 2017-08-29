@@ -43,12 +43,7 @@ return [
     /**
      * controller_plugins
      */
-    'controller_plugins' => [
-        'factories' => [
-            'paramTranslate'
-            => \RcmI18n\Controller\Plugin\ParamTranslatorFactory::class,
-        ],
-    ],
+    'controller_plugins' => require(__DIR__ . '/controller_plugins.php'),
     /**
      * doctrine
      */
@@ -128,15 +123,7 @@ return [
     /**
      * view_helpers
      */
-    'view_helpers' => [
-        'factories' => [
-            'translate'
-            => \RcmI18n\ViewHelper\TranslateHtmlFactory::class,
-
-            'paramTranslate'
-            => \RcmI18n\ViewHelper\ParamTranslatorFactory::class,
-        ]
-    ],
+    'view_helpers' => require(__DIR__ . '/view_helpers.php'),
     /**
      * view_manager
      */
