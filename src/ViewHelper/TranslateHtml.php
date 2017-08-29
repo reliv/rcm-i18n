@@ -2,6 +2,7 @@
 
 namespace RcmI18n\ViewHelper;
 
+use RcmHtmlPurifier\Api\Purify;
 use Zend\I18n\Translator\TranslatorAwareInterface;
 use Zend\I18n\View\Helper\AbstractTranslatorHelper;
 
@@ -26,18 +27,16 @@ use Zend\I18n\View\Helper\AbstractTranslatorHelper;
 class TranslateHtml extends AbstractTranslatorHelper implements TranslatorAwareInterface
 {
     /**
-     * @var \HTMLPurifier
+     * @var
      */
-    protected $htmlPurifier;
+    protected $purify;
 
     /**
-     * RcmEdit Constructor
-     *
-     * @param \HTMLPurifier $htmlPurifier html purifier class for striping web script
+     * @param Purify $purify
      */
-    public function __construct(\HTMLPurifier $htmlPurifier)
+    public function __construct(Purify $purify)
     {
-        $this->htmlPurifier = $htmlPurifier;
+        $this->purify = $purify;
     }
 
     /**
@@ -52,7 +51,7 @@ class TranslateHtml extends AbstractTranslatorHelper implements TranslatorAwareI
      */
     public function __invoke($message, $textDomain = 'default', $locale = null)
     {
-        return $this->htmlPurifier->purify(
+        return $this->purify->__invoke(
             $this->getTranslator()->translate($message, $textDomain, $locale)
         );
     }

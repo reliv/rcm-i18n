@@ -26,7 +26,6 @@ class DoctrineDbLoaderFactory
      */
     public function __invoke($container)
     {
-        ddd(get_class($container));
         // @BC for ZendFramework
         if ($container instanceof LoaderPluginManager) {
             $container = $container->getServiceLocator();
