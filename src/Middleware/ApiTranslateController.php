@@ -7,7 +7,7 @@ use Psr\Http\Message\ServerRequestInterface;
 use Zend\Diactoros\Response\JsonResponse;
 use Zend\Filter\StringTrim;
 use Zend\Filter\StripTags;
-use Zend\I18n\Translator\Translator;
+use Zend\I18n\Translator\TranslatorInterface;
 
 /**
  * @author James Jervis - https://github.com/jerv13
@@ -15,10 +15,10 @@ use Zend\I18n\Translator\Translator;
 class ApiTranslateController
 {
     /**
-     * @param Translator $translator
+     * @param TranslatorInterface $translator
      */
     public function __construct(
-        Translator $translator
+        TranslatorInterface $translator
     ) {
         $this->translator = $translator;
     }
@@ -26,7 +26,7 @@ class ApiTranslateController
     /**
      * getTranslator
      *
-     * @return Translator
+     * @return TranslatorInterface
      */
     protected function getTranslator()
     {
@@ -57,7 +57,7 @@ class ApiTranslateController
 
         $stripTagsFilter = new StripTags();
 
-        $namespace = (string)$request->getAttribute('namespace', 'default');
+        $namespace = (string)$request->getAttribute('rcmi18n-namespace', 'default');
 
         $translationParams = $request->getQueryParams();
 

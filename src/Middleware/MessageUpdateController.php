@@ -74,7 +74,7 @@ class MessageUpdateController
         ResponseInterface $response,
         callable $next = null
     ) {
-        $id = $request->getAttribute('id');
+        $id = $request->getAttribute('rcmi18n-message-id');
 
         $data = $request->getParsedBody();
 
@@ -86,7 +86,7 @@ class MessageUpdateController
             return new JsonResponse(null, 401);
         }
 
-        $locale = $request->getAttribute('locale');
+        $locale = $request->getAttribute('rcmi18n-locale');
 
         /**
          * White-list local and default test to make sure nothing funny is

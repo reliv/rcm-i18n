@@ -50,7 +50,7 @@ class ModuleConfig
              */
             'RcmUser' => require(__DIR__ . '/../config/rcm-user.php'),
             /**
-             * routes
+             * Expressive routes
              */
             'routes' => require(__DIR__ . '/../config/routes.php'),
             /**

@@ -1,5 +1,6 @@
 <?php
 /**
+ * Expressive
  * routes.php
  */
 return [
@@ -21,7 +22,7 @@ return [
 
     'rcmi18n.messages.locale' => [
         'name' => 'rcmi18n.messages.locale',
-        'path' => '/rcmi18n/messages/{locale:}',
+        'path' => '/rcmi18n/messages/{rcmi18n-locale}',
         'middleware' => \RcmI18n\Middleware\MessagesController::class,
         'options' => [],
         'allowed_methods' => ['GET'],
@@ -29,7 +30,7 @@ return [
 
     'rcmi18n.messages.locale.id' => [
         'name' => 'rcmi18n.messages.locale.id',
-        'path' => '/rcmi18n/messages/{locale:}/{id:}',
+        'path' => '/rcmi18n/messages/{rcmi18n-locale}/{rcmi18n-message-id}',
         'middleware' => \RcmI18n\Middleware\MessageUpdateController::class,
         'options' => [],
         'allowed_methods' => ['PUT'],
@@ -45,7 +46,7 @@ return [
 
     'api.rcm-translate-api.namespace' => [
         'name' => 'api.rcm-translate-api.namespace',
-        'path' => '/api/rcm-translate-api/{:namespace}',
+        'path' => '/api/rcm-translate-api[/{rcmi18n-namespace}]',
         'middleware' => \RcmI18n\Middleware\ApiTranslateController::class,
         'options' => [],
         'allowed_methods' => ['GET'],

@@ -41,7 +41,7 @@ class MessagesController
         ResponseInterface $response,
         callable $next = null
     ) {
-        $locale = $request->getAttribute('locale');
+        $locale = $request->getAttribute('rcmi18n-locale');
 
         $defaultMessages = $this->messageRepository->findBy(['locale' => 'en_US']);
         $localeMessages = $this->messageRepository->findBy(['locale' => $locale]);
