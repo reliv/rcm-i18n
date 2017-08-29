@@ -74,10 +74,6 @@ class MessageUpdateController
         ResponseInterface $response,
         callable $next = null
     ) {
-        $id = $request->getAttribute('rcmi18n-message-id');
-
-        $data = $request->getParsedBody();
-
         if (!$this->isAllowed(
             $request,
             ['privilege' => 'update']
@@ -85,8 +81,11 @@ class MessageUpdateController
         ) {
             return new JsonResponse(null, 401);
         }
-
+        $id = $request->getAttribute('rcmi18n-message-id');
         $locale = $request->getAttribute('rcmi18n-locale');
+        $data = $request->getParsedBody();
+
+        // @todo Validate input
 
         /**
          * White-list local and default test to make sure nothing funny is

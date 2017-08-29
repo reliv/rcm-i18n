@@ -31,7 +31,13 @@ return [
     'rcmi18n.messages.locale.id' => [
         'name' => 'rcmi18n.messages.locale.id',
         'path' => '/rcmi18n/messages/{rcmi18n-locale}/{rcmi18n-message-id}',
-        'middleware' => \RcmI18n\Middleware\MessageUpdateController::class,
+        'middleware' => [
+            \Zend\Expressive\Helper\BodyParams\BodyParamsMiddleware::class
+            => \Zend\Expressive\Helper\BodyParams\BodyParamsMiddleware::class,
+
+            \RcmI18n\Middleware\MessageUpdateController::class
+            => \RcmI18n\Middleware\MessageUpdateController::class,
+        ],
         'options' => [],
         'allowed_methods' => ['PUT'],
     ],
