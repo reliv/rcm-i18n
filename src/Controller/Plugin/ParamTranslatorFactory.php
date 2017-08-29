@@ -1,13 +1,12 @@
 <?php
 
-namespace RcmI18n\Factory;
+namespace RcmI18n\Controller\Plugin;
 
 use Psr\Container\ContainerInterface;
-use RcmI18n\Controller\Plugin\ParamTranslate;
 use Zend\Mvc\Controller\PluginManager;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
-class ControllerPluginParamTranslatorFactory
+class ParamTranslatorFactory
 {
     /**
      * __invoke

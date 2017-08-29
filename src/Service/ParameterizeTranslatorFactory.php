@@ -1,11 +1,10 @@
 <?php
 
-namespace RcmI18n\Factory;
+namespace RcmI18n\Service;
 
 use Psr\Container\ContainerInterface;
-use RcmI18n\Service\ParameterizeHtmlTranslator;
 
-class ServiceParameterizeHtmlTranslatorFactory
+class ParameterizeTranslatorFactory
 {
     /**
      * Create service
@@ -17,8 +16,7 @@ class ServiceParameterizeHtmlTranslatorFactory
     public function __invoke($container)
     {
         $translator = $container->get('MvcTranslator');
-        $htmlPurifier = $container->get('RcmHtmlPurifier');
 
-        return new ParameterizeHtmlTranslator($translator, $htmlPurifier);
+        return new ParameterizeTranslator($translator);
     }
 }

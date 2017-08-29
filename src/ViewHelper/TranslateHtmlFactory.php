@@ -1,18 +1,13 @@
 <?php
 
-namespace RcmI18n\Factory;
+namespace RcmI18n\ViewHelper;
 
 use Psr\Container\ContainerInterface;
-use RcmI18n\ViewHelper\TranslateHtml;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\View\HelperPluginManager;
 
 /**
  * TranslateHtmlFactory
- *
- * LongDescHere
- *
- * PHP version 5
  *
  * @category  Reliv
  * @package   RcmI18n\Factory
@@ -22,7 +17,7 @@ use Zend\View\HelperPluginManager;
  * @version   Release: <package_version>
  * @link      https://github.com/reliv
  */
-class ViewHelperTranslateHtmlFactory
+class TranslateHtmlFactory
 {
     /**
      * __invoke

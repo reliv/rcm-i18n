@@ -4,6 +4,7 @@
 namespace RcmI18n\Controller;
 
 use Rcm\Controller\AbstractRestfulJsonController;
+use RcmI18n\Entity\Message;
 
 /**
  * Class SiteTranslationsJsController
@@ -45,7 +46,7 @@ class SiteTranslationsJsController extends AbstractRestfulJsonController
             ->select(
                 'message.text,message.defaultText'
             )
-            ->from('RcmI18n\Entity\Message', 'message')
+            ->from(Message::class, 'message')
             ->where('message.locale = :locale')
             ->setParameter('locale', $locale);
 

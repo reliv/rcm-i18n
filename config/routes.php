@@ -10,4 +10,44 @@ return [
         'options' => [],
         'allowed_methods' => ['GET'],
     ],
+    
+    'rcmi18n.locales' => [
+        'name' => 'rcmi18n.locales',
+        'path' => '/rcmi18n/locales',
+        'middleware' => \RcmI18n\Middleware\LocaleController::class,
+        'options' => [],
+        'allowed_methods' => ['GET'],
+    ],
+
+    'rcmi18n.messages.locale' => [
+        'name' => 'rcmi18n.messages.locale',
+        'path' => '/rcmi18n/messages/{locale:}',
+        'middleware' => \RcmI18n\Middleware\MessagesController::class,
+        'options' => [],
+        'allowed_methods' => ['GET'],
+    ],
+
+    'rcmi18n.messages.locale.id' => [
+        'name' => 'rcmi18n.messages.locale.id',
+        'path' => '/rcmi18n/messages/{locale:}/{id:}',
+        'middleware' => \RcmI18n\Middleware\MessageUpdateController::class,
+        'options' => [],
+        'allowed_methods' => ['PUT'],
+    ],
+
+    'rcmi18n.translations-js' => [
+        'name' => 'rcmi18n.translations-js',
+        'path' => '/rcmi18n/translations.js',
+        'middleware' => \RcmI18n\Middleware\SiteTranslationsJsController::class,
+        'options' => [],
+        'allowed_methods' => ['GET'],
+    ],
+
+    'api.rcm-translate-api.namespace' => [
+        'name' => 'api.rcm-translate-api.namespace',
+        'path' => '/api/rcm-translate-api/{:namespace}',
+        'middleware' => \RcmI18n\Middleware\ApiTranslateController::class,
+        'options' => [],
+        'allowed_methods' => ['GET'],
+    ],
 ];

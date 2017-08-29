@@ -46,7 +46,7 @@ return [
     'controller_plugins' => [
         'factories' => [
             'paramTranslate'
-            => \RcmI18n\Factory\ControllerPluginParamTranslatorFactory::class,
+            => \RcmI18n\Controller\Plugin\ParamTranslatorFactory::class,
         ],
     ],
     /**
@@ -131,10 +131,10 @@ return [
     'view_helpers' => [
         'factories' => [
             'translate'
-            => \RcmI18n\Factory\ViewHelperTranslateHtmlFactory::class,
+            => \RcmI18n\ViewHelper\TranslateHtmlFactory::class,
 
             'paramTranslate'
-            => \RcmI18n\Factory\ViewHelperParamTranslatorFactory::class,
+            => \RcmI18n\ViewHelper\ParamTranslatorFactory::class,
         ]
     ],
     /**

@@ -1,22 +1,19 @@
 <?php
 
-namespace RcmI18n\Factory;
+namespace RcmI18n\Model;
 
 use Psr\Container\ContainerInterface;
 use Rcm\Api\Repository\Site\FindActiveSites;
-use RcmI18n\Model\Locales;
-use RcmI18n\Model\RcmSiteLocales;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
 /**
- * ModelRcmSiteLocalesFactory
  *
  * @author    Rod Mcnew <rmcnew@relivinc.com>
  * @copyright 2014 Reliv International
  * @license   License.txt New BSD License
  * @link      https://github.com/reliv
  */
-class ModelRcmSiteLocalesFactory
+class RcmSiteLocalesFactory
 {
     /**
      * __invoke

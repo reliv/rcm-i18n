@@ -8,7 +8,6 @@ use Zend\EventManager\EventInterface;
 use Zend\EventManager\EventManagerInterface;
 use Zend\EventManager\ListenerAggregateInterface;
 use Zend\I18n\Translator\Translator;
-use Zend\ServiceManager\ServiceLocatorInterface;
 
 /**
  * Class AddMissingTranslationListener

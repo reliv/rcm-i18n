@@ -1,6 +1,6 @@
 <?php
 
-namespace RcmI18n\Factory;
+namespace RcmI18n\Service;
 
 use Psr\Container\ContainerInterface;
 use Zend\I18n\Translator\Translator;
@@ -17,7 +17,7 @@ use Zend\ServiceManager\ServiceLocatorInterface;
  * @version   Release: <package_version>
  * @link      https://github.com/reliv
  */
-class TranslatorFactory
+class MvcTranslatorFactory
 {
     /**
      * __invoke

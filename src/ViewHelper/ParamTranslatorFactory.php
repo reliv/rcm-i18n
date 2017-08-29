@@ -1,13 +1,12 @@
 <?php
 
-namespace RcmI18n\Factory;
+namespace RcmI18n\ViewHelper;
 
 use Psr\Container\ContainerInterface;
-use RcmI18n\ViewHelper\ParamTranslate;
 use Zend\ServiceManager\ServiceLocatorInterface;
 use Zend\View\HelperPluginManager;
 
-class ViewHelperParamTranslatorFactory
+class ParamTranslatorFactory
 {
     /**
      * __invoke

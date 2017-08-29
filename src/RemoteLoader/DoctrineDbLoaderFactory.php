@@ -1,9 +1,8 @@
 <?php
 
-namespace RcmI18n\Factory;
+namespace RcmI18n\RemoteLoader;
 
 use Psr\Container\ContainerInterface;
-use RcmI18n\RemoteLoader\DoctrineDbLoader;
 use Zend\I18n\Translator\LoaderPluginManager;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
@@ -20,7 +19,7 @@ use Zend\ServiceManager\ServiceLocatorInterface;
  * @version   Release: <package_version>
  * @link      https://github.com/reliv
  */
-class RemoteLoaderDoctrineDbLoaderFactory
+class DoctrineDbLoaderFactory
 {
     /**
      * __invoke

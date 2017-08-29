@@ -1,9 +1,8 @@
 <?php
 
-namespace RcmI18n\Factory;
+namespace RcmI18n\Event;
 
 use Psr\Container\ContainerInterface;
-use RcmI18n\Event\MissingTranslationListener;
 use Zend\ServiceManager\ServiceLocatorInterface;
 
 /**

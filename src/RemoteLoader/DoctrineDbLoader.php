@@ -3,7 +3,6 @@
 namespace RcmI18n\RemoteLoader;
 
 use Doctrine\ORM\EntityManager;
-use Zend\I18n\Translator\Loader\RemoteLoaderInterface;
 use Zend\I18n\Translator\TextDomain;
 
 /**
