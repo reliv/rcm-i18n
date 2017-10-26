@@ -19,7 +19,7 @@ use Zend\I18n\View\Helper\AbstractTranslatorHelper;
  * @category  Reliv
  * @package   RcmI18n\ViewHelper
  * @author    Rod Mcnew <rmcnew@relivinc.com>
- * @copyright 2014 Reliv International
+ * @copyright 2017 Reliv International
  * @license   License.txt New BSD License
  * @version   Release: <package_version>
  * @link      https://github.com/reliv
