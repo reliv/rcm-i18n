@@ -49,7 +49,7 @@ class TranslationsAppStateController implements GetInterface
 
         return [
             'defaultLocale' => $locale,
-            'translations' => $siteTranslations
+            'translations' => [$locale => $siteTranslations]
         ];
     }
 
