@@ -9,7 +9,7 @@
  * @category  Reliv
  * @package   RcmI18n
  * @author    Rod Mcnew <rmcnew@relivinc.com>
- * @copyright 2014 Reliv International
+ * @copyright 2017 Reliv International
  * @license   License.txt New BSD License
  * @version   GIT: <git_id>
  * @link      https://github.com/reliv
@@ -30,7 +30,7 @@ use Zend\Stdlib\ArrayObject;
  * @category  Reliv
  * @package   RcmI18n
  * @author    Rod Mcnew <rmcnew@relivinc.com>
- * @copyright 2014 Reliv International
+ * @copyright 2017 Reliv International
  * @license   License.txt New BSD License
  * @version   Release: <package_version>
  * @link      https://github.com/reliv
