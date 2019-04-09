@@ -18,7 +18,6 @@ require __DIR__ . '/../../autoload.php';
  * @category  Reliv
  * @package   RcmI18nTest\Model
  * @author    Rod Mcnew <rmcnew@relivinc.com>
- * @copyright 2014 Reliv International
  * @license   License.txt New BSD License
  * @version   Release: <package_version>
  * @link      https://github.com/reliv

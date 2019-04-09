@@ -13,7 +13,6 @@ use Zend\ServiceManager\ServiceLocatorInterface;
  * @category  Reliv
  * @package   RcmI18n\Factory
  * @author    James Jervis <jjervis@relivinc.com>
- * @copyright 2014 Reliv International
  * @license   License.txt New BSD License
  * @version   Release: <package_version>
  * @link      https://github.com/reliv
