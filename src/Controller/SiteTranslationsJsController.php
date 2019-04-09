@@ -7,7 +7,7 @@ use Rcm\Controller\AbstractRestfulJsonController;
 use RcmI18n\Entity\Message;
 
 /**
- * Class SiteTranslationsJsController
+ * Class TranslationsAppStateController
  *
  * @category  Reliv
  * @package   RcmI18n\Controller
@@ -17,7 +17,7 @@ use RcmI18n\Entity\Message;
  * @version   Release: <package_version>
  * @link      https://github.com/reliv
  */
-class SiteTranslationsJsController extends AbstractRestfulJsonController
+class TranslationsAppStateController extends AbstractRestfulJsonController
 {
     /**
      * getLocale

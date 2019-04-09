@@ -42,14 +42,6 @@ return [
         'allowed_methods' => ['PUT'],
     ],
 
-    'rcmi18n.translations-js' => [
-        'name' => 'rcmi18n.translations-js',
-        'path' => '/rcmi18n/translations.js',
-        'middleware' => \RcmI18n\Middleware\SiteTranslationsJsController::class,
-        'options' => [],
-        'allowed_methods' => ['GET'],
-    ],
-
     'api.rcm-translate-api.namespace' => [
         'name' => 'api.rcm-translate-api.namespace',
         'path' => '/api/rcm-translate-api[/{rcmi18n-namespace}]',

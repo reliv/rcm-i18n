@@ -2,6 +2,8 @@
 
 namespace RcmI18n;
 
+use RcmI18n\AppState\TranslationsAppStateController;
+
 /**
  * Class ModuleConfig
  *
@@ -52,6 +54,9 @@ class ModuleConfig
              * navigation
              */
             'navigation' => require(__DIR__ . '/../config/navigation.php'),
+            'app_state' => [
+                'rcmi18n' => TranslationsAppStateController::class
+            ]
         ];
     }
 }

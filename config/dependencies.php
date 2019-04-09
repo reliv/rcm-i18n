@@ -3,6 +3,14 @@
  * dependencies.php
  */
 return [
+    'config_factories' => [
+        \RcmI18n\AppState\TranslationsAppStateController::class => [
+            'arguments' => [
+                \Doctrine\ORM\EntityManager::class,
+                \Rcm\Service\SiteService::class
+            ]
+        ]
+    ],
     'factories' => [
         /* ZF2 over-ride */
         'MvcTranslator'
@@ -29,9 +37,6 @@ return [
 
         \RcmI18n\Middleware\MessageUpdateController::class
         => \RcmI18n\Middleware\MessageUpdateControllerFactory::class,
-
-        \RcmI18n\Middleware\SiteTranslationsJsController::class
-        => \RcmI18n\Middleware\SiteTranslationsJsControllerFactory::class,
 
         /* Locales default */
         RcmI18n\Model\Locales::class

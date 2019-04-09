@@ -1,18 +1,17 @@
 <?php
 
-namespace RcmI18n\Middleware;
+namespace RcmI18n\AppState;
 
 use Doctrine\ORM\EntityManager;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Rcm\Service\SiteService;
 use RcmI18n\Entity\Message;
+use Reliv\AppState\GetInterface;
 use Zend\Diactoros\Response;
+use Psr\Http\Message\ServerRequestInterface as Request;
 
-/**
- * @author James Jervis - https://github.com/jerv13
- */
-class SiteTranslationsJsController
+class TranslationsAppStateController implements GetInterface
 {
     /**
      * @var EntityManager
@@ -26,7 +25,7 @@ class SiteTranslationsJsController
 
     /**
      * @param EntityManager $entityManager
-     * @param SiteService   $siteService
+     * @param SiteService $siteService
      */
     public function __construct(
         EntityManager $entityManager,
@@ -37,54 +36,21 @@ class SiteTranslationsJsController
     }
 
     /**
-     * __invoke
+     * Get current state for a request
      *
-     * @param ServerRequestInterface $request
-     * @param ResponseInterface      $response
-     * @param callable|null          $next
-     *
-     * @return ResponseInterface
+     * @param Request $request The request currently being processed
+     * @param array $options Arbitrary options that may influence state produced
+     * @return mixed The state produced, which may be any JSON-encodable value
      */
-    public function __invoke(
-        ServerRequestInterface $request,
-        ResponseInterface $response,
-        callable $next = null
-    ) {
-        $response = new Response(
-            'php://memory',
-            200,
-            [
-                'Content-Type' => 'application/javascript',
-                'Pragma' => 'cache',
-                'Cache-Control' => 'max-age=3600',
-            ]
-        );
+    public function __invoke(Request $request, array $options)
+    {
+        $locale = $this->getLocale($request);
+        $siteTranslations = $this->getSiteTranslations($locale);
 
-        $locale = $this->getLocale(
-            $request
-        );
-        $siteTranslations = $this->getSiteTranslations(
-            $locale
-        );
-        $translationJson = json_encode($siteTranslations);
-
-        $content = 'var rcmI18nTranslations = {' .
-            " defaultLocale: '{$locale}'," .
-            " translations: {'{$locale}': $translationJson}," .
-            ' get: function (defaultText, locale) {' .
-            '  if(!locale){locale = rcmI18nTranslations.defaultLocale;}' .
-            '  if (typeof rcmI18nTranslations.translations[locale][defaultText] === "string") ' .
-            '  {return rcmI18nTranslations.translations[locale][defaultText];}' .
-            '  return defaultText;' .
-            ' }' .
-            '};';
-
-        $body = $response->getBody();
-
-        $body->write($content);
-        $body->rewind();
-
-        return $response->withBody($body);
+        return [
+            'defaultLocale' => $locale,
+            'translations' => $siteTranslations
+        ];
     }
 
     /**

@@ -33,9 +33,6 @@ return [
             'RcmI18n\Controller\Messages'
             => \RcmI18n\Controller\MessagesController::class,
 
-            'RcmI18n\Controller\SiteTranslationsJs'
-            => \RcmI18n\Controller\SiteTranslationsJsController::class,
-
             'RcmI18n\Controller\ApiTranslateController'
             => \RcmI18n\Controller\ApiTranslateController::class,
         ]
@@ -84,15 +81,6 @@ return [
                     'route' => '/rcmi18n/messages/:locale[/:id]',
                     'defaults' => [
                         'controller' => 'RcmI18n\Controller\Messages',
-                    ],
-                ],
-            ],
-            'RcmI18n\SiteTranslationsJs' => [
-                'type' => 'Zend\Mvc\Router\Http\Segment',
-                'options' => [
-                    'route' => '/rcmi18n/translations.js',
-                    'defaults' => [
-                        'controller' => 'RcmI18n\Controller\SiteTranslationsJs',
                     ],
                 ],
             ],
