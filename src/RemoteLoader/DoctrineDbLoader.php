@@ -15,7 +15,6 @@ use Zend\I18n\Translator\TextDomain;
  * @category  Reliv
  * @package   RcmI18n
  * @author    Rod Mcnew <rmcnew@relivinc.com>
- * @copyright 2017 Reliv International
  * @license   License.txt New BSD License
  * @version   Release: <package_version>
  * @link      https://github.com/reliv
