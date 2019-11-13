@@ -20,8 +20,6 @@ class IsAllowedRcmUserTranslations implements IsAllowed
         ServerRequestInterface $request,
         array $options = []
     ): bool {
-        $privilege = (array_key_exists('privilege', $options) ? $options['privilege'] : 'read');
-
         return false; //This was disabled durring the ACL2 project because it doesn't follow new rules.
     }
 }
