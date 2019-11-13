@@ -11,20 +11,6 @@ use RcmUser\Service\RcmUserService;
 class IsAllowedRcmUserTranslations implements IsAllowed
 {
     /**
-     * @var RcmUserService
-     */
-    protected $rcmUserService;
-
-    /**
-     * @param RcmUserService $rcmUserService
-     */
-    public function __construct(
-        RcmUserService $rcmUserService
-    ) {
-        $this->rcmUserService = $rcmUserService;
-    }
-
-    /**
      * @param ServerRequestInterface $request
      * @param array                  $options
      *
@@ -36,9 +22,6 @@ class IsAllowedRcmUserTranslations implements IsAllowed
     ): bool {
         $privilege = (array_key_exists('privilege', $options) ? $options['privilege'] : 'read');
 
-        return $this->rcmUserService->isAllowed(
-            'translations',
-            $privilege
-        );
+        return false; //This was disabled durring the ACL2 project because it doesn't follow new rules.
     }
 }
