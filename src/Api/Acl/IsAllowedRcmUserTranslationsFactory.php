@@ -17,8 +17,6 @@ class IsAllowedRcmUserTranslationsFactory
      */
     public function __invoke($serviceContainer)
     {
-        return new IsAllowedRcmUserTranslations(
-            $serviceContainer->get(RcmUserService::class)
-        );
+        return new IsAllowedRcmUserTranslations();
     }
 }
